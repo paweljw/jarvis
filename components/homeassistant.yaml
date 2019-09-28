@@ -1,3 +1,4 @@
 auth_providers:
   - type: legacy_api_password
     api_password: !secret legacy_api_password
+  - type: homeassistant

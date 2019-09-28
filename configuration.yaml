@@ -3,7 +3,7 @@ alexa_media: !include components/alexa_media.yaml
 automation: !include_dir_merge_list automation/
 
 default_config:
-device_tracker: !include components/device_tracker.yaml
+# device_tracker: !include components/device_tracker.yaml
 discovery:
 
 fan: !include components/fan.yaml
