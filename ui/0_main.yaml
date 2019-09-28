@@ -20,6 +20,10 @@
       type: history-graph
     - entity: weather.dom
       type: weather-forecast
+    - type: sensor
+      entity: sensor.harvest_hours
+      graph: none
+      title: PJW's work today
   badges:
     - person.pawel
     - person.magda

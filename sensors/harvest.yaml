@@ -1,0 +1,14 @@
+- platform: harvest
+  name: PJW hours
+  account_id: !secret harvest_account_id
+  token: !secret harvest_token
+- platform: template
+  sensors:
+    harvest_minutes:
+      friendly_name: "Work minutes"
+      value_template: "{{ state_attr('sensor.pjw_hours', 'minutes') }}"
+      unit_of_measurement: "m"
+    harvest_hours:
+      friendly_name: "Work hours"
+      value_template: "{{ (state_attr('sensor.pjw_hours', 'minutes') / 60) | round(2) }}"
+      unit_of_measurement: "h"
