@@ -1,0 +1,13 @@
+- alias: Notify me that my work is done
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.harvest_minutes
+    above: 420
+  condition:
+    - condition: state
+      entity_id: person.pawel
+      state: codest
+  action:
+    - service: notify.pjw_telegram
+      data:
+        message: "Job's done! 7 hours is enough. Time to go home."

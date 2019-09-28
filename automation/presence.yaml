@@ -1,0 +1,23 @@
+- alias: Notify me that Radiance left
+  trigger:
+    - platform: state
+      entity_id: person.magda
+      from: 'home'
+      to: 'not_home'
+      for: '00:01:30'
+  action:
+    - service: notify.pjw_telegram
+      data:
+        message: 'Radiance is on the move.'
+
+- alias: Notify me that Radiance came back
+  trigger:
+    - platform: state
+      entity_id: person.magda
+      from: 'not_home'
+      to: 'home'
+      for: '00:01:30'
+  action:
+    - service: notify.pjw_telegram
+      data:
+        message: 'Radiance is back at home base.'

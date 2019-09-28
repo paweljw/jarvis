@@ -1,2 +1,5 @@
 - platform: alexa_media
   name: alexa_media
+- name: pjw_telegram
+  platform: telegram
+  chat_id: !secret telegram_pjw_chat_id
