@@ -1,5 +1,20 @@
 - title: Overview
   cards:
+    - type: conditional
+      conditions:
+        - entity: person.pawel
+          state_not: "codest"
+      card:
+        type: custom:transit-card
+        entity: sensor.uniwersytet_pedagogiczny_departures
+
+    - type: conditional
+      conditions:
+        - entity: person.pawel
+          state: "codest"
+      card:
+        type: custom:transit-card
+        entity: sensor.bialucha_departures
     - type: sensor
       entity: sensor.bronowice_aqi
       graph: line

@@ -1,2 +1,6 @@
+resources:
+  - url: /local/custom-lovelace/transit/card.js?v=8
+    type: module
+
 title: Home
 views: !include_dir_merge_list ui/

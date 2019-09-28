@@ -2,9 +2,8 @@
   trigger:
     - platform: state
       entity_id: person.magda
-      from: 'home'
       to: 'not_home'
-      for: '00:03:00'
+      for: '00:05:00'
   action:
     - service: notify.pjw_telegram
       data:
@@ -14,9 +13,8 @@
   trigger:
     - platform: state
       entity_id: person.magda
-      from: 'not_home'
       to: 'home'
-      for: '00:03:00'
+      for: '00:05:00'
   action:
     - service: notify.pjw_telegram
       data:
