@@ -1,6 +1,9 @@
 """
 Fetch how much work time is harvested on getharvest.com
+This has been blatantly stolen from
+https://github.com/macbury/SmartHouse/blob/master/home-assistant/custom_components/harvest/
 """
+
 
 import voluptuous as vol
 import logging

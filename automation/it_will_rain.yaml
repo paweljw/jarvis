@@ -1,0 +1,13 @@
+- alias: Alert me if it's going to rain soon
+  trigger:
+    - platform: time
+      at: '6:30:00'
+  condition:
+    - condition: state
+      entity_id: sensor.it_will_rain
+      state: 'on'
+
+  action:
+    - service: notify.pjw_telegram
+      data:
+        message: "It's going to rain today, better pack an umbrella."

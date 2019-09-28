@@ -1,0 +1,25 @@
+- title: Weather
+  cards:
+    - entities:
+      - sensor.xiaomi_airpurifier_air_quality_pm25
+      - sensor.bronowice_aqi
+      hours_to_show: 24
+      refresh_interval: 60
+      title: Air quality
+      type: history-graph
+    - entities:
+      - sensor.xiaomi_airpurifier_temp
+      - sensor.dark_sky_apparent_temperature
+      hours_to_show: 24
+      refresh_interval: 60
+      title: Temperature
+      type: history-graph
+    - entities:
+      - sensor.xiaomi_airpurifier_humidity
+      - sensor.dark_sky_humidity
+      hours_to_show: 24
+      refresh_interval: 60
+      title: Humidity
+      type: history-graph
+    - entity: weather.dom
+      type: weather-forecast

@@ -1,25 +1,37 @@
 - title: Overview
   cards:
-    - entities:
-      - sensor.xiaomi_airpurifier_air_quality_pm25
-      hours_to_show: 24
-      refresh_interval: 60
-      title: Air quality
-      type: history-graph
-    - entities:
-      - sensor.xiaomi_airpurifier_temp
-      hours_to_show: 24
-      refresh_interval: 60
-      title: Temperature
-      type: history-graph
-    - entities:
-      - sensor.xiaomi_airpurifier_humidity
-      hours_to_show: 24
-      refresh_interval: 60
-      title: Humidity
-      type: history-graph
-    - entity: weather.dom
-      type: weather-forecast
+    - type: sensor
+      entity: sensor.bronowice_aqi
+      graph: line
+      title: Bronowice AQI
+    - type: sensor
+      entity: sensor.xiaomi_airpurifier_air_quality_pm25
+      graph: line
+      title: AQI inside
+    - type: sensor
+      entity: sensor.dark_sky_apparent_temperature
+      graph: line
+      title: Temperature outside
+    - type: sensor
+      entity: sensor.xiaomi_airpurifier_temp
+      graph: line
+      title: Temperature inside
+    - type: sensor
+      entity: sensor.dark_sky_humidity
+      graph: line
+      title: Humidity outside
+    - type: sensor
+      entity: sensor.xiaomi_airpurifier_humidity
+      graph: line
+      title: Humidity inside
+    - type: sensor
+      entity: sensor.xiaomi_airpurifier_humidity
+      graph: line
+      title: Humidity inside
+    - type: sensor
+      entity: sensor.dark_sky_precip_probability
+      graph: none
+      title: Rain probability
     - type: sensor
       entity: sensor.harvest_hours
       graph: none

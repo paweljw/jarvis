@@ -1,0 +1,24 @@
+- platform: rest
+  name: Bronowice AQI
+  unit_of_measurement: AQI
+  resource: https://api.waqi.info/api/feed/@8691/obs.en.json
+  force_update: true
+  value_template: '{{ value_json.rxs.obs[0].msg.aqi }}'
+
+- platform: darksky
+  api_key: !secret darksky_secret
+  monitored_conditions:
+    - temperature
+    - precip_probability
+    - apparent_temperature
+    - wind_speed
+    - wind_gust
+    - humidity
+    - pressure
+    - ozone
+    - uv_index
+    - nearest_storm_distance
+
+- platform: it_will_rain
+  name: It will rain
+  entity_id: weather.dark_sky
