@@ -10,10 +10,10 @@
   name: Uniwersytet Pedagogiczny departures
   command: >
     curl -s \"https://mpk.jacekk.net/proxy_bus.php/services/passageInfo/stopPassages/stop?stop=88&mode=departure\" | jq \'[.actual | map(select(.direction == \"Stary Kleparz\")) | .[0:5] | .[] | { at: .actualTime, l: .patternText }]\'
-  scan_interval: 300
+  scan_interval: 60
 
 - platform: command_line
   name: Bialucha departures
   command: >
     curl -s \"https://mpk.jacekk.net/proxy_tram.php/services/passageInfo/stopPassages/stop?stop=130&mode=departure\" | jq \'[.actual | map(select(.direction == \"Nowy Bieżanów P+R\")) |  map(select(.patternText == \"73\")) | .[0:5] | .[] | { at: .actualTime, l: .patternText }]\'
-  scan_interval: 300
+  scan_interval: 60
