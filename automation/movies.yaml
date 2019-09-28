@@ -3,6 +3,7 @@
   - entity_id: media_player.plex_chromecast
     platform: state
     to: playing
+    for: '00:00:05'
   condition:
   - condition: state
     entity_id: light.hue_ambiance_lamp_1
@@ -20,6 +21,7 @@
   - entity_id: media_player.plex_chromecast
     platform: state
     from: playing
+    for: '00:00:05'
   condition:
   - condition: state
     entity_id: light.hue_ambiance_lamp_1
