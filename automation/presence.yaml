@@ -4,7 +4,7 @@
       entity_id: person.magda
       from: 'home'
       to: 'not_home'
-      for: '00:01:30'
+      for: '00:03:00'
   action:
     - service: notify.pjw_telegram
       data:
@@ -16,7 +16,7 @@
       entity_id: person.magda
       from: 'not_home'
       to: 'home'
-      for: '00:01:30'
+      for: '00:03:00'
   action:
     - service: notify.pjw_telegram
       data:

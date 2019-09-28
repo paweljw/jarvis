@@ -34,4 +34,6 @@ telegram_bot: !include components/telegram_bot.yaml
 tts:
   - platform: google_translate
 
+weather: !include components/weather.yaml
+
 zone: !include components/zones.yaml

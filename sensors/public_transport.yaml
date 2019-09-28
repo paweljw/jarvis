@@ -1,0 +1,13 @@
+# - platform: rest
+#   name: Uniwersytet Pedagogiczny departures
+#   resource: https://mpk.jacekk.net/proxy_bus.php/services/passageInfo/stopPassages/stop?stop=88&mode=departure
+#   force_update: true
+#   json_attributes:
+#     - actual
+#   value_template: '{{ value_json["actual"][0] }}'
+
+- platform: command_line
+  name: Uniwersytet Pedagogiczny departures
+  command: >
+    curl -s \"https://mpk.jacekk.net/proxy_bus.php/services/passageInfo/stopPassages/stop?stop=88&mode=departure\" | jq \'[.actual | map(select(.direction == \"Stary Kleparz\")) | .[0:5] | .[] | { at: .actualTime, l: .patternText }]\'
+  scan_interval: 300
