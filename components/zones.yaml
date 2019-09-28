@@ -1,0 +1,15 @@
+- name: Home
+  latitude: !secret zone_home_lat
+  longitude: !secret zone_home_lon
+  radius: 100
+  icon: mdi:account-multiple
+- name: Codest
+  latitude: 50.0655329
+  longitude: 19.9731772
+  radius: 250
+  icon: mdi:worker
+- name: Comarch
+  latitude: 50.0768108
+  longitude: 19.9941655
+  radius: 250
+  icon: mdi:worker

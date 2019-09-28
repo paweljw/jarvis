@@ -1,0 +1,8 @@
+token: !secret plex_token
+host: 192.168.0.228
+port: 32400
+ssl: false
+verify_ssl: false
+media_player:
+  use_episode_art: true
+  show_all_controls: false

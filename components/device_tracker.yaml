@@ -1,0 +1,6 @@
+- platform: upc_connect
+  password: !secret upc_password
+  interval_seconds: 90
+  consider_home: 180
+  new_device_defaults:
+    track_new_devices: true

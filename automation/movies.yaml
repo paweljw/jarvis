@@ -1,0 +1,34 @@
+- alias: "Movie mode on"
+  trigger:
+  - entity_id: media_player.plex_chromecast
+    platform: state
+    to: playing
+  condition:
+  - condition: state
+    entity_id: light.hue_ambiance_lamp_1
+    state: 'on'
+  - condition: state
+    entity_id: light.hue_ambiance_lamp_3
+    state: 'on'
+  action:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: "Living room"
+      scene_name: "Movie"
+- alias: "Movie mode off"
+  trigger:
+  - entity_id: media_player.plex_chromecast
+    platform: state
+    from: playing
+  condition:
+  - condition: state
+    entity_id: light.hue_ambiance_lamp_1
+    state: 'on'
+  - condition: state
+    entity_id: light.hue_ambiance_lamp_3
+    state: 'on'
+  action:
+  - service: hue.hue_activate_scene
+    data:
+      group_name: "Living room"
+      scene_name: "Czytanie"

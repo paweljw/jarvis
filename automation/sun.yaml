@@ -1,0 +1,25 @@
+- alias: Lights on at sunset
+  trigger:
+  - event: sunset
+    offset: -0:30
+    platform: sun
+  condition:
+    condition: or
+    conditions:
+    - condition: state
+      entity_id: person.pawel
+      state: home
+    - condition: state
+      entity_id: person.magda
+      state: home
+  action:
+    - service: hue.hue_activate_scene
+      data:
+        group_name: "Living room"
+        scene_name: "Energia"
+    - service: notify.alexa_media_pawel_s_echo_dot
+      data:
+        message: "It's getting really dark in here."
+        data:
+          type: announce
+          method: all

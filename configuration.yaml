@@ -1,0 +1,36 @@
+alexa:
+alexa_media: !include components/alexa_media.yaml
+automation: !include_dir_merge_list automation/
+
+default_config:
+device_tracker: !include components/device_tracker.yaml
+discovery:
+
+fan: !include components/fan.yaml
+frontend: !include components/frontend.yaml
+
+group: !include groups.yaml
+
+homeassistant: !include components/homeassistant.yaml
+http: !include components/http.yaml
+
+input_number: !include components/input_number.yaml
+input_select: !include components/input_select.yaml
+intent_script: !include components/intents.yaml
+ios:
+
+lovelace:
+  mode: yaml
+
+notify: !include components/notify.yaml
+
+plex: !include components/plex.yaml
+
+script: !include scripts.yaml
+sensor: !include_dir_merge_list sensors/
+switch: !include_dir_merge_list switches/
+
+tts:
+  - platform: google_translate
+
+zone: !include components/zones.yaml

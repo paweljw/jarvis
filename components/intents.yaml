@@ -1,0 +1,29 @@
+LocateIntent:
+  speech:
+    text: >
+      {%- if User.lower() == "renegade" -%}
+        Pawel is at {{ states.person.pawel.state.replace('_', ' ') }}.
+      {%- elif User.lower() == "radiance" -%}
+        Magda is at {{ states.person.magda.state.replace('_', ' ') }}.
+      {%- elif User.lower() == "radians" -%}
+        Magda is at {{ states.person.magda.state.replace('_', ' ') }}.
+      {%- else -%}
+        I am sorry, I do not know where {{ User }} is.
+      {%- endif -%}
+  card:
+    type: simple
+    title: Location queried
+    content: Ask Home Assistant about user location
+WhereAreWeIntent:
+  speech:
+    text: >
+      {%- if is_state('person.pawel', 'home') and
+              is_state('person.magda', 'home') -%}
+        You are both home, silly
+      {%- else -%}
+        Pawel is at {{ states.person.pawel.state.replace('_', ' ') }} and Magda is at {{ states.person.pawel.state.replace('_', ' ') }}.
+      {% endif %}
+  card:
+    type: simple
+    title: Where are We?
+    content: Ask Home Assistant about where everyone is
