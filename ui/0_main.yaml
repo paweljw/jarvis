@@ -1,0 +1,30 @@
+- title: Overview
+  cards:
+    - entities:
+      - sensor.xiaomi_airpurifier_air_quality_pm25
+      hours_to_show: 24
+      refresh_interval: 60
+      title: Air quality
+      type: history-graph
+    - entities:
+      - sensor.xiaomi_airpurifier_temp
+      hours_to_show: 24
+      refresh_interval: 60
+      title: Temperature
+      type: history-graph
+    - entities:
+      - sensor.xiaomi_airpurifier_humidity
+      hours_to_show: 24
+      refresh_interval: 60
+      title: Humidity
+      type: history-graph
+    - entity: weather.dom
+      type: weather-forecast
+  badges:
+    - person.pawel
+    - person.magda
+    - sun.sun
+    - media_player.purgatory
+    - sensor.plex
+    - fan.xiaomi_miio_device
+  path: default_view

@@ -1,0 +1,18 @@
+- title: "Media & lights"
+  cards:
+    - entity: media_player.purgatory
+      type: media-control
+    - entities:
+        - light.hue_ambiance_lamp_1
+        - light.hue_ambiance_lamp_3
+      show_header_toggle: true
+      title: Salon
+      type: entities
+    - entities:
+        - light.hue_go_1
+        - light.hue_ambiance_lamp_2
+      show_header_toggle: true
+      title: Sypialnia
+      type: entities
+    - entity: media_player.playstation_4
+      type: media-control
