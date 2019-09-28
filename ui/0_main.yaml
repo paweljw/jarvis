@@ -40,10 +40,6 @@
       graph: line
       name: Humidity inside
     - type: sensor
-      entity: sensor.xiaomi_airpurifier_humidity
-      graph: line
-      name: Humidity inside
-    - type: sensor
       entity: sensor.dark_sky_precip_probability
       graph: none
       name: Rain probability
