@@ -21,6 +21,12 @@
   - entity_id: media_player.plex_chromecast
     platform: state
     from: playing
+    to: paused
+    for: '00:00:05'
+  - entity_id: media_player.plex_chromecast
+    platform: state
+    from: playing
+    to: idle
     for: '00:00:05'
   condition:
   - condition: state
