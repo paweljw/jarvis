@@ -11,6 +11,7 @@ frontend: !include components/frontend.yaml
 
 group: !include groups.yaml
 
+history: !include components/history.yaml
 homeassistant: !include components/homeassistant.yaml
 http: !include components/http.yaml
 
