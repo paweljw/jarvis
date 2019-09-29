@@ -20,6 +20,7 @@ input_select: !include components/input_select.yaml
 intent_script: !include components/intents.yaml
 ios:
 
+logbook: !include components/logbook.yaml
 lovelace:
   mode: yaml
 

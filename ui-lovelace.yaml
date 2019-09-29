@@ -3,4 +3,5 @@ resources:
     type: module
 
 title: Home
+theme: darkblue
 views: !include_dir_merge_list ui/

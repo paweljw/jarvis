@@ -2,3 +2,4 @@
   api_key: !secret telegram_secret
   allowed_chat_ids:
     - !secret telegram_pjw_chat_id
+    - !secret telegram_magda_chat_id

@@ -1,0 +1,27 @@
+- alias: Dark theme at sunset
+  trigger:
+  - event: sunset
+    offset: -0:30
+    platform: sun
+  action:
+    - service: frontend.set_theme
+      data:
+        name: google_dark
+
+- alias: Light theme at sunrise
+  trigger:
+  - event: sunrise
+    platform: sun
+  action:
+    - service: frontend.set_theme
+      data:
+        name: google_light
+
+- alias: 'Set theme at startup'
+  trigger:
+    - platform: homeassistant
+      event: start
+  action:
+    service: frontend.set_theme
+    data:
+      name: google_light

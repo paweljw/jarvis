@@ -19,3 +19,25 @@
     - service: notify.pjw_telegram
       data:
         message: 'Radiance is back at home base.'
+
+- alias: Notify her that PJW left
+  trigger:
+    - platform: state
+      entity_id: person.pawel
+      to: 'not_home'
+      for: '00:05:00'
+  action:
+    - service: notify.magda_telegram
+      data:
+        message: 'PJW left home.'
+
+- alias: Notify her that PJW came back
+  trigger:
+    - platform: state
+      entity_id: person.pawel
+      to: 'home'
+      for: '00:05:00'
+  action:
+    - service: notify.pjw_telegram
+      data:
+        message: 'PJW is back home.'

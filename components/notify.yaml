@@ -3,3 +3,6 @@
 - name: pjw_telegram
   platform: telegram
   chat_id: !secret telegram_pjw_chat_id
+- name: magda_telegram
+  platform: telegram
+  chat_id: !secret telegram_magda_chat_id

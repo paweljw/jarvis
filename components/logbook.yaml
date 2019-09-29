@@ -1,0 +1,4 @@
+exclude:
+  entities:
+    - automation.air_purifier_mode_changed
+    - automation.air_purifier_favorite_level_changed
