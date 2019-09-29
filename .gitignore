@@ -19,3 +19,4 @@ tts
 *.conf
 known_devices.yaml
 __pycache__
+icloud

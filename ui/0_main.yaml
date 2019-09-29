@@ -47,6 +47,8 @@
       entity: sensor.harvest_hours
       graph: none
       name: PJW's work today
+    - type: shopping-list
+      title: Shopping List
   badges:
     - person.pawel
     - person.magda

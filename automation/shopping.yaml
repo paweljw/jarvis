@@ -1,0 +1,39 @@
+- alias: 'Add to shopping list from PJW'
+  trigger:
+    - platform: event
+      event_type: telegram_command
+      event_data:
+        command: '/g'
+        chat_id: !secret telegram_pjw_chat_id
+  action:
+    - service: notify.pjw_telegram
+      data_template:
+        message: >
+          I've added {{ trigger.event.data.args | join(" ") }} to shopping list, sir.
+    - service: notify.magda_telegram
+      data_template:
+        message: >
+          PJW added {{ trigger.event.data.args | join(" ") }} to shopping list, ma'am.
+    - service: shopping_list.add_item
+      data_template:
+        name: '{{ trigger.event.data.args | join(" ") }}'
+
+- alias: 'Add to shopping list from Magda'
+  trigger:
+    - platform: event
+      event_type: telegram_command
+      event_data:
+        command: '/g'
+        chat_id: !secret telegram_magda_chat_id
+  action:
+    - service: notify.magda_telegram
+      data_template:
+        message: >
+          I've added {{ trigger.event.data.args | join(" ") }} to shopping list, ma'am.
+    - service: notify.pjw_telegram
+      data_template:
+        message: >
+          Magda added {{ trigger.event.data.args | join(" ") }} to shopping list, sir.
+    - service: shopping_list.add_item
+      data_template:
+        name: '{{ trigger.event.data.args | join(" ") }}'

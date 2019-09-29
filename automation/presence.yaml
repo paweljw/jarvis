@@ -38,6 +38,6 @@
       to: 'home'
       for: '00:05:00'
   action:
-    - service: notify.pjw_telegram
+    - service: notify.magda_telegram
       data:
         message: 'PJW is back home.'

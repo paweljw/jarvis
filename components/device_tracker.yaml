@@ -1,6 +1,4 @@
-- platform: upc_connect
-  password: !secret upc_password
-  interval_seconds: 180
-  consider_home: 300
-  new_device_defaults:
-    track_new_devices: true
+- platform: icloud
+  username: !secret icloud_user
+  password: !secret icloud_pass
+  account_name: accountname
