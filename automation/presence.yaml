@@ -101,7 +101,7 @@
 - alias: Notify me that Magda left work
   trigger:
     - platform: state
-      entity_id: person.pawel
+      entity_id: person.magda
       from: 'comarch'
       to: 'not_home'
       for: '00:03:00'

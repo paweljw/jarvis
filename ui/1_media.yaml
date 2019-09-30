@@ -16,9 +16,16 @@
       type: entities
     - entity: media_player.playstation_4
       type: media-control
+    - type: sensor
+      entity: sensor.deluge_down_speed
+      graph: line
+      name: Deluge download speed
     - entities:
         - sensor.deluge_down_speed
         - sensor.deluge_status
         - switch.deluge_switch
+        - type: weblink
+          name: Deluge Web UI
+          url: http://monolith.local:8112
       type: entities
       title: Deluge
