@@ -10,7 +10,6 @@
     - entity: sensor.xiaomi_airpurifier_speed
     - entity: sensor.xiaomi_airpurifier_filter_remaining
     show_header_toggle: false
-    theme: default
     title: Air Purifier
     type: entities
   - entities:
@@ -18,6 +17,5 @@
       - entity: sensor.xiaomi_airpurifier_temp
       - entity: sensor.xiaomi_airpurifier_humidity
     show_header_toggle: false
-    theme: default
     title: Environment
     type: entities
