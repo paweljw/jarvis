@@ -62,3 +62,25 @@
       data:
         entity_id: fan.xiaomi_miio_device
         speed: "Silent"
+
+- alias: Switch fan on at 11 AM
+  trigger:
+    - platform: time
+      at: '11:00:00'
+  action:
+    - service: fan.turn_on
+      data:
+        entity_id: fan.xiaomi_miio_device
+    - service: fan.set_speed
+      data:
+        entity_id: fan.xiaomi_miio_device
+        speed: "Auto"
+
+- alias: Switch fan off at noon
+  trigger:
+    - platform: time
+      at: '12:00:00'
+  action:
+    - service: fan.turn_off
+      data:
+        entity_id: fan.xiaomi_miio_device
