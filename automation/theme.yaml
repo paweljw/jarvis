@@ -6,7 +6,7 @@
   action:
     - service: frontend.set_theme
       data:
-        name: google_dark
+        name: dark
 
 - alias: Light theme at sunrise
   trigger:
@@ -15,7 +15,7 @@
   action:
     - service: frontend.set_theme
       data:
-        name: google_light
+        name: clear
 
 - alias: 'Set theme at startup'
   trigger:
@@ -24,4 +24,4 @@
   action:
     service: frontend.set_theme
     data:
-      name: google_light
+      name: clear

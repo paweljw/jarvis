@@ -1,7 +1,9 @@
 resources:
   - url: /local/custom-lovelace/transit/card.js?v=8
     type: module
+  - url: /local/custom.css
+    type: css
 
 title: Home
-theme: darkblue
+background: var(--background-image)
 views: !include_dir_merge_list ui/

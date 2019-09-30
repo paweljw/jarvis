@@ -108,7 +108,7 @@ class TransitCard extends LitElement {
     return html`
       <div class="departure">
         <div class="minutes">
-          ${minutesLeft || '??'} <span>min</span>
+          ${minutesLeft === null ? '??' : minutesLeft} <span>min</span>
         </div>
         <div class="details">
           <div class="details-summary">

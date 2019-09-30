@@ -1,0 +1,10 @@
+- platform: template
+  sensors:
+    pjw_away:
+      entity_id: person.pawel
+      value_template: '{% if states("person.pawel") != "home" %}true{% else %}false{% endif %}'
+- platform: template
+  sensors:
+    magda_away:
+      entity_id: person.magda
+      value_template: '{% if states("person.magda") != "home" %}true{% else %}false{% endif %}'

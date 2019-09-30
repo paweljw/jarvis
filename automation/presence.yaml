@@ -1,43 +1,111 @@
-- alias: Notify me that Radiance left
+- alias: Notify me that Magda left
   trigger:
     - platform: state
       entity_id: person.magda
+      from: 'home'
       to: 'not_home'
-      for: '00:05:00'
+      for: '00:03:00'
+  condition:
+    condition: state
+    entity_id: sensor.pjw_away
+    state: 'true'
   action:
     - service: notify.pjw_telegram
       data:
-        message: 'Radiance is on the move.'
+        message: 'Magda left home.'
 
-- alias: Notify me that Radiance came back
+- alias: Notify me that Magda came back
   trigger:
     - platform: state
       entity_id: person.magda
+      from: 'not_home'
       to: 'home'
-      for: '00:05:00'
+      for: '00:03:00'
+  condition:
+    condition: state
+    entity_id: sensor.pjw_away
+    state: 'true'
   action:
     - service: notify.pjw_telegram
       data:
-        message: 'Radiance is back at home base.'
+        message: 'Magda is back home.'
 
-- alias: Notify her that PJW left
+- alias: Notify Magda that PJW left
   trigger:
     - platform: state
       entity_id: person.pawel
+      from: 'home'
       to: 'not_home'
-      for: '00:05:00'
+      for: '00:03:00'
+  condition:
+    condition: state
+    entity_id: sensor.magda_away
+    state: 'true'
   action:
     - service: notify.magda_telegram
       data:
         message: 'PJW left home.'
 
-- alias: Notify her that PJW came back
+- alias: Notify Magda that PJW came back
   trigger:
     - platform: state
       entity_id: person.pawel
+      from: 'not_home'
       to: 'home'
-      for: '00:05:00'
+      for: '00:03:00'
+  condition:
+    condition: state
+    entity_id: sensor.magda_away
+    state: 'true'
   action:
     - service: notify.magda_telegram
       data:
         message: 'PJW is back home.'
+
+- alias: Notify Magda that PJW got to work
+  trigger:
+    - platform: state
+      entity_id: person.pawel
+      from: 'not_home'
+      to: 'codest'
+      for: '00:03:00'
+  action:
+    - service: notify.magda_telegram
+      data:
+        message: 'PJW arrived at work.'
+
+- alias: Notify Magda that PJW left work
+  trigger:
+    - platform: state
+      entity_id: person.pawel
+      from: 'codest'
+      to: 'not_home'
+      for: '00:03:00'
+  action:
+    - service: notify.magda_telegram
+      data:
+        message: 'PJW left work.'
+
+- alias: Notify me that Magda got to work
+  trigger:
+    - platform: state
+      entity_id: person.magda
+      from: 'not_home'
+      to: 'comarch'
+      for: '00:03:00'
+  action:
+    - service: notify.pjw_telegram
+      data:
+        message: 'Magda arrived at work.'
+
+- alias: Notify me that Magda left work
+  trigger:
+    - platform: state
+      entity_id: person.pawel
+      from: 'comarch'
+      to: 'not_home'
+      for: '00:03:00'
+  action:
+    - service: notify.pjw_telegram
+      data:
+        message: 'Magda left work.'
