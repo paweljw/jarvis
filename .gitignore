@@ -1,3 +1,4 @@
 vars.yml
 .env.graylog
 .docker
+.env.plex

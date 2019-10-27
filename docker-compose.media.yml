@@ -1,0 +1,16 @@
+version: '3.5'
+services:
+  plex:
+    network_mode: host
+    image: plexinc/pms-docker
+    env_file:
+      - .env.plex
+    volumes:
+      - .docker/data/plex/config:/config
+      - .docker/data/plex/transcode:/transcode
+      - /home:/data
+    logging:
+      driver: gelf
+      options:
+        tag: plex
+        gelf-address: udp://localhost:12201

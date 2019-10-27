@@ -1,6 +1,6 @@
 # Main provisioning playbook
 
-## Variable inclusion
+# Variable inclusion
 - hosts: all
   become: yes
   tasks:
@@ -8,15 +8,15 @@
       include_vars:
         file: vars.yml
 
-## Environment variables (persistent)
-# - hosts: adloquium
-#   become: yes
-#   tasks:
-#     - name: Set JARVIS_DIR
-#       lineinfile:
-#         path: /etc/environment
-#         line: "JARVIS_DIR={{ jarvis_dir }}"
-#         insertbefore: EOF
+# Environment variables (persistent)
+- hosts: adloquium
+  become: yes
+  tasks:
+    - name: Set JARVIS_DIR
+      lineinfile:
+        path: /etc/environment
+        line: "JARVIS_DIR={{ jarvis_dir }}"
+        insertbefore: EOF
 
 # Quality of life basics
 - hosts: adloquium
@@ -33,55 +33,55 @@
     - apt:
         name: zsh
 
-## Nvidia docker stuff
-# - hosts: adloquium
-#   become: yes
-#   roles:
-#     - role: uchida.nvidia-container-runtime
-#       nvidia_container_runtime_version: 2.0.0
-#       nvidia_container_runtime_docker_version: 5:18.09.7~3-0~ubuntu-bionic
-#       nvidia_container_runtime_revision: 3
-#   tasks:
-#     - apt:
-#         name: docker-compose
+# Nvidia docker stuff
+- hosts: adloquium
+  become: yes
+  roles:
+    - role: uchida.nvidia-container-runtime
+      nvidia_container_runtime_version: 2.0.0
+      nvidia_container_runtime_docker_version: 5:18.09.7~3-0~ubuntu-bionic
+      nvidia_container_runtime_revision: 3
+  tasks:
+    - apt:
+        name: docker-compose
 
 # ## Use Nvidia's runtime for docker
-# - hosts: adloquium
-#   become: yes
-#   handlers:
-#     - name: restart dockerd
-#       become: yes
-#       command: systemctl restart docker
-#   tasks:
-#     - name: configure docker to use nvidia runtime
-#       template:
-#         src: ./etc/docker/daemon.json
-#         dest: /etc/docker/daemon.json
-#       notify:
-#         - restart dockerd
-#     - name: adding existing user '{{ user }}' to group sudo
-#       user:
-#         name: '{{ user }}'
-#         groups: docker
-#         append: yes
+- hosts: adloquium
+  become: yes
+  handlers:
+    - name: restart dockerd
+      become: yes
+      command: systemctl restart docker
+  tasks:
+    - name: configure docker to use nvidia runtime
+      template:
+        src: ./etc/docker/daemon.json
+        dest: /etc/docker/daemon.json
+      notify:
+        - restart dockerd
+    - name: adding existing user '{{ user }}' to group sudo
+      user:
+        name: '{{ user }}'
+        groups: docker
+        append: yes
 
 # ## Build and install nvtop
-# - hosts: adloquium
-#   become: yes
-#   tasks:
-#       - apt:
-#           name: cmake
-#       - apt:
-#           name: libncurses5-dev
-#       - apt:
-#           name: libncursesw5-dev
-#       - apt:
-#           name: git
-#       - name: install nvtop
-#         command: /bin/sh -c "git clone https://github.com/Syllo/nvtop.git && mkdir -p nvtop/build && cd nvtop/build && cmake .. -DNVML_RETRIEVE_HEADER_ONLINE=True && make && make install"
-#         args:
-#          chdir: /tmp
-#          creates: /usr/local/bin/nvtop
+- hosts: adloquium
+  become: yes
+  tasks:
+      - apt:
+          name: cmake
+      - apt:
+          name: libncurses5-dev
+      - apt:
+          name: libncursesw5-dev
+      - apt:
+          name: git
+      - name: install nvtop
+        command: /bin/sh -c "git clone https://github.com/Syllo/nvtop.git && mkdir -p nvtop/build && cd nvtop/build && cmake .. -DNVML_RETRIEVE_HEADER_ONLINE=True && make && make install"
+        args:
+         chdir: /tmp
+         creates: /usr/local/bin/nvtop
 
 # Enable Jarvis binary systemwide
 - hosts: adloquium
@@ -94,7 +94,7 @@
         dest: "/usr/bin/jarvis"
         state: link
 
-# Graylog service
+# Docker-based services
 - hosts: adloquium
   become: yes
   handlers:
@@ -106,6 +106,13 @@
       service:
         name: graylog
         state: restarted
+        enabled: yes
+    - name: restart media
+      become: yes
+      service:
+        name: media
+        state: restarted
+        enabled: yes
   tasks:
     - name: Create elasticsearch directory (cause the image is dumb)
       become: yes
@@ -121,3 +128,10 @@
       notify:
         - reload systemctl
         - restart graylog
+    - name: Install media service
+      template:
+        src: ./lib/systemd/system/media.service
+        dest: /lib/systemd/system/media.service
+      notify:
+        - reload systemctl
+        - restart media

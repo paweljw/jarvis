@@ -66,3 +66,7 @@ function jarvis_execute_command() {
 function jarvis_command_graylog() {
   source "${JARVIS_DIR}/scripts/graylog.sh"
 }
+
+function jarvis_command_media() {
+  source "${JARVIS_DIR}/scripts/media.sh"
+}
