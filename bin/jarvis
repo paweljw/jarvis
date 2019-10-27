@@ -1,0 +1,38 @@
+#!/bin/zsh
+
+COMMAND=${1}
+shift 1
+COMMAND_ARGS=${@}
+
+
+function jarvis_command_help() {
+  echo "
+  $ jarvis help                                  - print this help message
+  $ jarvis graylog                               - manage support
+  $ jarvis certbot                               - update ssl certificates
+  $ jarvis cleanup                               - cleanup docker shit
+  $ jarvis ps                                    - show processes
+  $ jarvis logs                                  - print all logs
+  $ jarvis ddns                                  - update dns on cloudflare
+  $ jarvis env                                   - print all envs
+  $ jarvis docker-compose args                   - run docker compose commands
+"
+}
+
+source /etc/environment
+
+source "${JARVIS_DIR}/scripts/jarvis.zsh"
+
+function main() {
+  if [ -z ${JARVIS_DIR+x} ];
+    then echo "\$JARVIS_DIR is unset";
+    return 1;
+  fi;
+
+  cd $JARVIS_DIR;
+  if ! jarvis_execute_command; then
+    return 1
+  fi
+}
+
+main
