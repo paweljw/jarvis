@@ -1,0 +1,69 @@
+# Main provisioning playbook
+
+## Variable inclusion
+- hosts: all
+  become: yes
+  tasks:
+    - name: include vars from vars.yml
+      include_vars:
+        file: vars.yml
+
+## Quality of life basics
+- hosts: adloquium
+  become: yes
+  tasks:
+    - apt:
+        name: tree
+    - apt:
+        name: htop
+    - apt:
+        name: aptitude # cause if I see one more warning about this...
+    - apt:
+        name: mc
+
+## Nvidia docker stuff
+- hosts: adloquium
+  become: yes
+  roles:
+    - role: uchida.nvidia-container-runtime
+      nvidia_container_runtime_version: 2.0.0
+      nvidia_container_runtime_docker_version: 5:18.09.7~3-0~ubuntu-bionic
+      nvidia_container_runtime_revision: 3
+
+## Use Nvidia's runtime for docker
+- hosts: adloquium
+  become: yes
+  handlers:
+    - name: restart dockerd
+      become: yes
+      command: systemctl restart docker
+  tasks:
+    - name: configure docker to use nvidia runtime
+      template:
+        src: ./etc/docker/daemon.json
+        dest: /etc/docker/daemon.json
+      notify:
+        - restart dockerd
+    - name: adding existing user '{{ user }}' to group sudo
+      user:
+        name: '{{ user }}'
+        groups: docker
+        append: yes
+
+## Build and install nvtop
+- hosts: adloquium
+  become: yes
+  tasks:
+      - apt:
+          name: cmake
+      - apt:
+          name: libncurses5-dev
+      - apt:
+          name: libncursesw5-dev
+      - apt:
+          name: git
+      - name: install nvtop
+        command: /bin/sh -c "git clone https://github.com/Syllo/nvtop.git && mkdir -p nvtop/build && cd nvtop/build && cmake .. -DNVML_RETRIEVE_HEADER_ONLINE=True && make && make install"
+        args:
+         chdir: /tmp
+         creates: /usr/local/bin/nvtop

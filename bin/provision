@@ -1,0 +1,10 @@
+#!/bin/bash
+
+cd /jarvis
+
+ansible-galaxy install -r infrastructure/galaxy_roles.yml
+ansible-playbook infrastructure/playbook.yml -i infrastructure/inventory.ini
+
+if [ ! -z "$OLDPWD" ]; then
+  cd -
+fi
