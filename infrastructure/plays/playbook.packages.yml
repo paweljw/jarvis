@@ -20,6 +20,8 @@
         name: golang
     - apt:
         name: avahi-daemon
+    - apt:
+        name: postgresql-client
     - service:
         name: avahi-daemon
         state: restarted

@@ -17,6 +17,12 @@
         name: media
         state: restarted
         enabled: yes
+    - name: restart shared
+      become: yes
+      service:
+        name: shared
+        state: restarted
+        enabled: yes
   tasks:
     - name: Create elasticsearch directory (cause the image is dumb)
       become: yes
@@ -39,3 +45,10 @@
       notify:
         - reload systemctl
         - restart media
+    - name: Install shared service
+      template:
+        src: ../templates/lib/systemd/system/shared.service
+        dest: /lib/systemd/system/shared.service
+      notify:
+        - reload systemctl
+        - restart shared

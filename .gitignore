@@ -3,3 +3,7 @@ vars.yml
 .docker
 .env.plex
 .env.crontab
+.env.influxdb
+.env.busix
+.env.postgresql
+.env.rss

@@ -25,6 +25,10 @@ function jarvis_command_cleanup() {
   ​docker volume rm $(docker volume ls -qf dangling=true)
 }
 
+function jarvis_command_psql() {
+  PGPASSWORD=$POSTGRES_PASSWORD psql --host localhost --username=$POSTGRES_USER --port=5432 $POSTGRES_DB;
+}
+
 function jarvis_command_env() {
   env
 }
@@ -35,6 +39,7 @@ function jarvis_command_ps() {
 
 function jarvis_command_ddns() {
   bin/ddns.py $MAIN_DOMAIN $JARVIS_SUBDOMAIN 1;
+  bin/ddns.py $MAIN_DOMAIN $RSS_SUBDOMAIN 1;
 }
 
 function jarvis_command_certbot() {
@@ -60,9 +65,13 @@ function jarvis_execute_command() {
 }
 
 function jarvis_command_graylog() {
-  source "${JARVIS_DIR}/scripts/graylog.sh"
+  source "${JARVIS_DIR}/scripts/graylog.zsh"
 }
 
 function jarvis_command_media() {
-  source "${JARVIS_DIR}/scripts/media.sh"
+  source "${JARVIS_DIR}/scripts/media.zsh"
+}
+
+function jarvis_command_shared() {
+  source "${JARVIS_DIR}/scripts/shared.zsh"
 }

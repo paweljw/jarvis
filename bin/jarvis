@@ -8,7 +8,9 @@ COMMAND_ARGS=${@}
 function jarvis_command_help() {
   echo "
   $ jarvis help                                  - print this help message
-  $ jarvis graylog                               - manage support
+  $ jarvis graylog                               - manage graylog
+  $ jarvis media                                 - manage media
+  $ jarvis shared                                - manage shared
   $ jarvis certbot                               - update ssl certificates
   $ jarvis cleanup                               - cleanup docker shit
   $ jarvis ps                                    - show processes
@@ -30,6 +32,7 @@ function main() {
   fi;
 
   jarvis_load_variables ".env.crontab";
+  jarvis_load_variables ".env.postgresql";
 
   cd $JARVIS_DIR;
   if ! jarvis_execute_command; then

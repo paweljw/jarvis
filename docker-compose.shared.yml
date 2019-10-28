@@ -1,0 +1,91 @@
+# Supporting services, like database that always must be online
+version: '3.5'
+services:
+  redis:
+    image: redis:4.0.10
+    ports:
+      - 6379:6379
+    volumes:
+      - .docker/data/redis:/data
+    logging:
+      driver: gelf
+      options:
+        tag: redis
+        gelf-address: udp://localhost:12201
+  influxdb:
+    restart: unless-stopped
+    image: influxdb:latest
+    ports:
+      - "0.0.0.0:18086:8086"
+    volumes:
+      - .docker/data/influxdb:/var/lib/influxdb
+    env_file:
+      - '.env.influxdb'
+    logging:
+      driver: gelf
+      options:
+        tag: influxdb
+        gelf-address: udp://localhost:12201
+  database:
+    image: postgres:9.6.10-alpine
+    restart: unless-stopped
+    security_opt:
+      - seccomp:unconfined
+    ports:
+      - 0.0.0.0:5432:5432
+    environment:
+      PGDATA: /data
+    env_file:
+      - '.env.postgresql'
+    volumes:
+      - ./postgresql/:/docker-entrypoint-initdb.d/
+      - .docker/data/postgresql:/data
+      - /tmp/shared:/shared
+    logging:
+      driver: gelf
+      options:
+        tag: database
+        gelf-address: udp://localhost:12201
+  glances:
+    restart: unless-stopped
+    image: nicolargo/glances
+    environment:
+      - GLANCES_OPT=-w
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./glances/:/glances/conf/
+    ports:
+      - 7001:61208
+    logging:
+      driver: gelf
+      options:
+        tag: glances
+        gelf-address: udp://localhost:12201
+  rss:
+    image: miniflux/miniflux:latest
+    restart: unless-stopped
+    depends_on:
+      - database
+    ports:
+      - 7002:8080
+    environment:
+      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database:5432/miniflux?sslmode=disable
+    env_file:
+      - '.env.rss'
+    logging:
+      driver: gelf
+      options:
+        tag: rss
+        gelf-address: udp://localhost:12201
+  busix:
+    image: macbury/busix:latest
+    network_mode: host
+    env_file:
+      - '.env.busix'
+    logging:
+      driver: gelf
+      options:
+        tag: busix
+        gelf-address: udp://localhost:12201

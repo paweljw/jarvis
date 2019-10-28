@@ -3,3 +3,4 @@ jarvis_dir: /jarvis
 local_domain: adloquium.local
 domain: adloquium.somehere
 email: p@somewhere
+rss_domain: miniflux.somehere

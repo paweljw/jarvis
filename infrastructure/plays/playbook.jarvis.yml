@@ -1,0 +1,20 @@
+# Initialize Jarvis environment
+- hosts: adloquium
+  become: yes
+  tasks:
+    - name: Set JARVIS_DIR
+      lineinfile:
+        path: /etc/environment
+        line: "JARVIS_DIR={{ jarvis_dir }}"
+        insertbefore: EOF
+    - name: Set GOPATH
+      lineinfile:
+        path: /etc/environment
+        line: "GOPATH={{ jarvis_dir }}/.go"
+        insertbefore: EOF
+    - name: Create symbolic link for bin/jarvis
+      become: yes
+      file:
+        src: "/jarvis/bin/jarvis"
+        dest: "/usr/bin/jarvis"
+        state: link
