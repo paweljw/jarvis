@@ -1,6 +1,10 @@
 # Quality of life basics
 - hosts: adloquium
   become: yes
+  handlers:
+    - name: reload sysctl
+      become: yes
+      command: sysctl -p
   tasks:
     - apt:
         name: tree
@@ -12,3 +16,17 @@
         name: mc
     - apt:
         name: zsh
+    - apt:
+        name: golang
+    - apt:
+        name: avahi-daemon
+    - service:
+        name: avahi-daemon
+        state: restarted
+        enabled: yes
+    - name: Set fswatchers
+      lineinfile:
+        path: /etc/sysctl.conf
+        line: fs.inotify.max_user_watches=524288
+        insertbefore: EOF
+      notify: reload sysctl
