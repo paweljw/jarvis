@@ -1,0 +1,18 @@
+[Unit]
+ConditionPathExists=/jarvis/docker-compose.ha.yml
+Description=home assistant
+Requires=docker.service
+After=docker.service
+
+[Service]
+Environment=SMART_HOUSE_DIR=/jarvis
+Restart=always
+User=root
+StandardOutput=syslog
+StandardError=syslog
+
+ExecStart=/bin/zsh -l -c "/usr/bin/jarvis ha up"
+ExecStop=/bin/zsh -l -c "/usr/bin/jarvis ha down"
+
+[Install]
+WantedBy=multi-user.target

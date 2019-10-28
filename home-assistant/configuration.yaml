@@ -15,6 +15,7 @@ history: !include components/history.yaml
 homeassistant: !include components/homeassistant.yaml
 http: !include components/http.yaml
 
+influxdb: !include components/influxdb.yaml
 input_boolean: !include components/input_boolean.yaml
 input_number: !include components/input_number.yaml
 input_select: !include components/input_select.yaml

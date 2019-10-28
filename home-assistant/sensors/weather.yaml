@@ -6,7 +6,7 @@
   value_template: '{{ value_json.rxs.obs[0].msg.aqi }}'
 
 - platform: darksky
-  api_key: !secret darksky_secret
+  api_key: !env_var HA_DARKSKY_SECRET
   monitored_conditions:
     - temperature
     - precip_probability

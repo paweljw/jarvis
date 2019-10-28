@@ -1,4 +1,4 @@
 - platform: xiaomi_miio
   host: 192.168.0.199
-  token: !secret xiaomi_token
+  token: !env_var HA_XIAOMI_TOKEN
   name: bedroom_air_purifier

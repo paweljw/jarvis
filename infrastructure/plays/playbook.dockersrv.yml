@@ -23,11 +23,24 @@
         name: shared
         state: restarted
         enabled: yes
+    - name: restart ha
+      become: yes
+      service:
+        name: ha
+        state: restarted
+        enabled: yes
   tasks:
     - name: Create elasticsearch directory (cause the image is dumb)
       become: yes
       file:
         path: "{{ jarvis_dir }}/.docker/data/elasticsearch"
+        state: directory
+        owner: "{{ user }}"
+        group: "{{ user }}"
+    - name: Create grafana directory (cause the image is dumb)
+      become: yes
+      file:
+        path: "{{ jarvis_dir }}/.docker/data/grafana"
         state: directory
         owner: "{{ user }}"
         group: "{{ user }}"
@@ -52,3 +65,10 @@
       notify:
         - reload systemctl
         - restart shared
+    - name: Install ha service
+      template:
+        src: ../templates/lib/systemd/system/ha.service
+        dest: /lib/systemd/system/ha.service
+      notify:
+        - reload systemctl
+        - restart ha

@@ -55,5 +55,5 @@
     - sun.sun
     - media_player.purgatory
     - sensor.plex
-    - fan.xiaomi_miio_device
+    - fan.bedroom_air_purifier
   path: default_view

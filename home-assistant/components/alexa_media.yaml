@@ -1,4 +1,4 @@
 accounts:
-  - email: !secret alexa_email
-    password: !secret alexa_password
+  - email: !env_var HA_ALEXA_EMAIL
+    password: !env_var HA_ALEXA_PASS
     url: "amazon.com"

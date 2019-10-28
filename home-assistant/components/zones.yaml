@@ -1,6 +1,6 @@
 - name: Home
-  latitude: !secret zone_home_lat
-  longitude: !secret zone_home_lon
+  latitude: !env_var HA_HOME_LAT
+  longitude: !env_var HA_HOME_LON
   radius: 250
   icon: mdi:account-multiple
 - name: codest

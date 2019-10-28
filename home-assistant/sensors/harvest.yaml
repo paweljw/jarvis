@@ -1,7 +1,7 @@
 - platform: harvest
   name: PJW hours
-  account_id: !secret harvest_account_id
-  token: !secret harvest_token
+  account_id: !env_var HA_HARVEST_ACCOUNT_ID
+  token: !env_var HA_HARVEST_TOKEN
 - platform: template
   sensors:
     harvest_minutes:

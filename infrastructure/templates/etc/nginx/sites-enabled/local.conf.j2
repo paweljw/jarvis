@@ -10,6 +10,14 @@ upstream glances {
   server 127.0.0.1:7001 fail_timeout=0;
 }
 
+upstream hass {
+  server 127.0.0.1:8123 fail_timeout=0;
+}
+
+upstream grafana {
+  server 127.0.0.1:4100 fail_timeout=0;
+}
+
 server {
   listen 80;
   listen [::]:80;
@@ -72,6 +80,32 @@ server {
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Proto $scheme;
+  }
+
+   location /api/webhook {
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $host;
+    proxy_pass http://hass/api/webhook;
+  }
+
+  location /ping.txt {
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_pass http://hass/local/ping.txt;
+  }
+
+  location / {
+    proxy_pass http://hass/;
+    proxy_set_header Host $host;
+
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
   }
 
   error_page 404 403 @error;

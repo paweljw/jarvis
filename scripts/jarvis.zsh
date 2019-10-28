@@ -4,8 +4,7 @@ function jarvis_load_variables() {
     echo "File ${JARVIS_DIR}/$1 does not exist!"
     exit 1;
   fi;
-
-  export $(cat "${JARVIS_DIR}/$1";)
+  export $(cat "${JARVIS_DIR}/$1")
 }
 
 function jarvis_validate_command() {
@@ -34,7 +33,7 @@ function jarvis_command_env() {
 }
 
 function jarvis_command_ps() {
-  docker-compose ps
+  docker-compose -f docker-compose.ha.yml ps
 }
 
 function jarvis_command_ddns() {
@@ -74,4 +73,8 @@ function jarvis_command_media() {
 
 function jarvis_command_shared() {
   source "${JARVIS_DIR}/scripts/shared.zsh"
+}
+
+function jarvis_command_ha() {
+  source "${JARVIS_DIR}/scripts/ha.zsh"
 }

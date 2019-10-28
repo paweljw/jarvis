@@ -1,3 +1,3 @@
 - platform: darksky
-  api_key: !secret darksky_secret
+  api_key: !env_var HA_DARKSKY_SECRET
   mode: hourly

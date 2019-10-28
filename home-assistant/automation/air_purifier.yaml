@@ -8,10 +8,10 @@
   action:
     - service: fan.xiaomi_miio_set_led_off
       data:
-        entity_id: fan.xiaomi_miio_device
+        entity_id: fan.bedroom_air_purifier
     - service: fan.xiaomi_miio_set_buzzer_off
       data:
-        entity_id: fan.xiaomi_miio_device
+        entity_id: fan.bedroom_air_purifier
 
 - alias: Switch on fan leds after sunrise
   trigger:
@@ -23,10 +23,10 @@
   action:
     - service: fan.xiaomi_miio_set_led_on
       data:
-        entity_id: fan.xiaomi_miio_device
+        entity_id: fan.bedroom_air_purifier
     - service: fan.xiaomi_miio_set_buzzer_on
       data:
-        entity_id: fan.xiaomi_miio_device
+        entity_id: fan.bedroom_air_purifier
 
 - alias: Switch fan off at 8 AM
   trigger:
@@ -35,7 +35,7 @@
   action:
     - service: fan.turn_off
       data:
-        entity_id: fan.xiaomi_miio_device
+        entity_id: fan.bedroom_air_purifier
 
 - alias: Switch fan on at 3 PM
   trigger:
@@ -44,10 +44,10 @@
   action:
     - service: fan.turn_on
       data:
-        entity_id: fan.xiaomi_miio_device
+        entity_id: fan.bedroom_air_purifier
     - service: fan.set_speed
       data:
-        entity_id: fan.xiaomi_miio_device
+        entity_id: fan.bedroom_air_purifier
         speed: "Auto"
 
 - alias: Set fan to silent for the night
@@ -57,10 +57,10 @@
   action:
     - service: fan.turn_on
       data:
-        entity_id: fan.xiaomi_miio_device
+        entity_id: fan.bedroom_air_purifier
     - service: fan.set_speed
       data:
-        entity_id: fan.xiaomi_miio_device
+        entity_id: fan.bedroom_air_purifier
         speed: "Silent"
 
 - alias: Switch fan on at 11 AM
@@ -70,10 +70,10 @@
   action:
     - service: fan.turn_on
       data:
-        entity_id: fan.xiaomi_miio_device
+        entity_id: fan.bedroom_air_purifier
     - service: fan.set_speed
       data:
-        entity_id: fan.xiaomi_miio_device
+        entity_id: fan.bedroom_air_purifier
         speed: "Auto"
 
 - alias: Switch fan off at noon
@@ -83,4 +83,4 @@
   action:
     - service: fan.turn_off
       data:
-        entity_id: fan.xiaomi_miio_device
+        entity_id: fan.bedroom_air_purifier

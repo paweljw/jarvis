@@ -1,7 +1,7 @@
 - title: Air purifier
   cards:
   - entities:
-    - entity: fan.xiaomi_miio_device
+    - entity: fan.bedroom_air_purifier
     - entity: input_select.xiaomi_airpurifier_mode
     - entity: input_number.xiaomi_airpurifier_favorite_level
     - entity: switch.xiaomi_airpurifier_child_lock

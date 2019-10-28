@@ -7,3 +7,5 @@ vars.yml
 .env.busix
 .env.postgresql
 .env.rss
+.env.home-assistant
+.env.grafana

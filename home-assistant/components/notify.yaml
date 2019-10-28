@@ -2,7 +2,7 @@
   name: alexa_media
 - name: pjw_telegram
   platform: telegram
-  chat_id: !secret telegram_pjw_chat_id
+  chat_id: !env_var HA_TELEGRAM_PJW_CHAT_ID
 - name: magda_telegram
   platform: telegram
-  chat_id: !secret telegram_magda_chat_id
+  chat_id: !env_var HA_TELEGRAM_MAGDA_CHAT_ID

@@ -26,6 +26,26 @@ services:
       options:
         tag: influxdb
         gelf-address: udp://localhost:12201
+  grafana:
+    image: grafana/grafana:5.4.2
+    restart: unless-stopped
+    env_file:
+      - '.env.grafana'
+      - '.env.influxdb'
+    environment:
+      GF_SERVER_DOMAIN: "${HA_DOMAIN}"
+      GF_SERVER_ROOT_URL: "https://${HA_DOMAIN}/grafana/"
+    ports:
+      - "127.0.0.1:4100:3000"
+    volumes:
+      - .docker/data/grafana:/var/lib/grafana
+    depends_on:
+      - influxdb
+    logging:
+      driver: gelf
+      options:
+        tag: grafana
+        gelf-address: udp://localhost:12201
   database:
     image: postgres:9.6.10-alpine
     restart: unless-stopped

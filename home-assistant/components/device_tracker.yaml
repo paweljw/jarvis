@@ -1,8 +1,9 @@
 - platform: icloud
-  username: !secret icloud_user
-  password: !secret icloud_pass
+  username: !env_var HA_ICLOUD_USER
+  password: !env_var HA_ICLOUD_PASS
   account_name: accountname
 - platform: ping
   hosts:
     pjw_phone: 192.168.0.171
     pjw_watch: 192.168.0.81
+    magda_phone: 192.168.0.87

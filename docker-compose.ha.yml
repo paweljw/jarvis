@@ -1,0 +1,24 @@
+version: '3.5'
+services:
+  home-assistant:
+    build: ./home-assistant/
+    env_file:
+      - '.env.home-assistant'
+      - '.env.influxdb'
+    restart: unless-stopped
+    cap_add:
+      - net_bind_service
+    privileged: true
+    network_mode: host
+    environment:
+      - TZ=Europe/Warsaw
+      - HOME_ASSISTANT_DB_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:5432/${POSTGRES_DB}
+    volumes:
+      - ./home-assistant:/config
+      # - /var/log/fail2ban.log:/fail2ban/fail2ban.log:ro
+      - /tmp:/tmp
+    logging:
+      driver: gelf
+      options:
+        tag: homeassistant
+        gelf-address: udp://localhost:12201

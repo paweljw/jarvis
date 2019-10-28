@@ -33,6 +33,9 @@ function main() {
 
   jarvis_load_variables ".env.crontab";
   jarvis_load_variables ".env.postgresql";
+  jarvis_load_variables ".env.influxdb";
+  jarvis_load_variables ".env.home-assistant";
+  jarvis_load_variables ".env.grafana";
 
   cd $JARVIS_DIR;
   if ! jarvis_execute_command; then
