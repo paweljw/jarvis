@@ -1,0 +1,26 @@
+- hosts: adloquium
+  become: yes
+  tasks:
+    - name: Add crontab entry for refreshing dns
+      cron:
+        name: "ddns"
+        minute: "*/15"
+        job: "/usr/bin/zsh -l -c 'jarvis ddns' >> /tmp/ddns.log 2>&1"
+    - name: Add crontab entry for certs
+      cron:
+        name: "certs"
+        hour: "4"
+        minute: "0"
+        job: "/usr/bin/zsh -l -c 'jarvis certbot' >> /tmp/certbot.log 2>&1"
+    - name: Cleanup docker frob
+      cron:
+        name: 'docker'
+        hour: "3"
+        minute: "0"
+        job: "/usr/bin/zsh -l -c 'docker system prune -f'"
+    - name: Cleanup old logs
+      cron:
+        name: 'logs'
+        hour: "22"
+        minute: "0"
+        job: '/usr/bin/zsh -l -c "rm /tmp/*.log"'

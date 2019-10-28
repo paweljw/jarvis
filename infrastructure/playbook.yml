@@ -8,7 +8,7 @@
       include_vars:
         file: vars.yml
 
-# Environment variables (persistent)
+# Initialize Jarvis environment
 - hosts: adloquium
   become: yes
   tasks:
@@ -17,23 +17,29 @@
         path: /etc/environment
         line: "JARVIS_DIR={{ jarvis_dir }}"
         insertbefore: EOF
-
-- name: Quality of life stuff
-  import_playbook: plays/playbook.packages.yml
-
-- name: NVidia/docker/nvtop
-  import_playbook: plays/playbook.nvidia.yml
-
-# Enable Jarvis binary systemwide
-- hosts: adloquium
-  become: yes
-  tasks:
-    - name: Create symbolic link for bin/smart-hose
+    - name: Set GOPATH
+      lineinfile:
+        path: /etc/environment
+        line: "GOPATH={{ jarvis_dir }}/.go"
+        insertbefore: EOF
+    - name: Create symbolic link for bin/jarvis
       become: yes
       file:
         src: "/jarvis/bin/jarvis"
         dest: "/usr/bin/jarvis"
         state: link
 
-- name: Docker services
-  import_playbook: plays/playbook.dockersrv.yml
+# - name: Quality of life stuff
+#   import_playbook: plays/playbook.packages.yml
+
+# - name: NVidia/docker/nvtop
+#   import_playbook: plays/playbook.nvidia.yml
+
+# - name: Docker services
+#   import_playbook: plays/playbook.dockersrv.yml
+
+- name: nginx
+  import_playbook: plays/playbook.nginx.yml
+
+- name: crontab
+  import_playbook: plays/playbook.cron.yml

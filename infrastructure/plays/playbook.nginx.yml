@@ -1,0 +1,62 @@
+- hosts: adloquium
+  become: yes
+  roles:
+    - role: geerlingguy.nginx
+  handlers:
+    - name: restart nginx
+      become: yes
+      service:
+        name: nginx
+        enabled: yes
+        state: restarted
+  tasks:
+    - name: install minica
+      command: /bin/sh -c "go get github.com/jsha/minica"
+      become: yes
+      args:
+        creates: "{{ jarvis_dir }}/.go/bin/minica"
+    - name: provision local domain CA and cert
+      command: /bin/sh -c "{{ jarvis_dir }}/.go/bin/minica --domains {{ local_domain }}"
+      become: no
+      args:
+        chdir: "{{ jarvis_dir }}/.minica"
+        creates: "{{ jarvis_dir }}/.minica/{{ local_domain }}/cert.pem"
+    - name: Create /etc/nginx/sites-enabled/local.conf
+      template:
+        src: ../templates/etc/nginx/sites-enabled/local.conf.j2
+        dest: /etc/nginx/sites-enabled/local.conf
+      notify:
+        - reload nginx
+        - restart nginx
+
+- hosts: adloquium
+  become: yes
+  roles:
+    - role: geerlingguy.certbot
+  vars:
+    certbot_auto_renew: false
+    certbot_admin_email: "{{ email }}"
+    certbot_create_if_missing: true
+    certbot_certs:
+      - domains:
+        - "{{ domain }}"
+
+- hosts: adloquium
+  become: yes
+  roles:
+    - role: geerlingguy.nginx
+  handlers:
+    - name: restart nginx
+      become: yes
+      service:
+        name: nginx
+        enabled: yes
+        state: restarted
+  tasks:
+    - name: Create /etc/nginx/sites-enabled/remote.conf
+      template:
+        src: ../templates/etc/nginx/sites-enabled/remote.conf.j2
+        dest: /etc/nginx/sites-enabled/remote.conf
+      notify:
+        - reload nginx
+        - restart nginx

@@ -29,6 +29,8 @@ function main() {
     return 1;
   fi;
 
+  jarvis_load_variables ".env.crontab";
+
   cd $JARVIS_DIR;
   if ! jarvis_execute_command; then
     return 1

@@ -1,7 +1,7 @@
 #!/bin/zsh
 function jarvis_load_variables() {
   if [ ! -f ${JARVIS_DIR}/$1 ]; then
-    echo "File ${JARVIS_DIR}/$1 do not exists!"
+    echo "File ${JARVIS_DIR}/$1 does not exist!"
     exit 1;
   fi;
 
@@ -34,11 +34,7 @@ function jarvis_command_ps() {
 }
 
 function jarvis_command_ddns() {
-  bin/ddns.py $MAIN_DOMAIN $HOME_ASSISTANT_SUBDOMAIN 1;
-  bin/ddns.py $MAIN_DOMAIN notes.$HOME_ASSISTANT_SUBDOMAIN 0;
-  bin/ddns.py $MAIN_DOMAIN $HOME_ASSISTANT_VPNDOMAIN 0;
-  bin/ddns.py $MAIN_DOMAIN podcast.$HOME_ASSISTANT_SUBDOMAIN 0;
-  bin/ddns.py $MAIN_DOMAIN rss.$HOME_ASSISTANT_SUBDOMAIN 0;
+  bin/ddns.py $MAIN_DOMAIN $JARVIS_SUBDOMAIN 1;
 }
 
 function jarvis_command_certbot() {

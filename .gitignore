@@ -2,3 +2,4 @@ vars.yml
 .env.graylog
 .docker
 .env.plex
+.env.crontab

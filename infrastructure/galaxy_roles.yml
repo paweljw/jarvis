@@ -1,1 +1,3 @@
 - src: uchida.nvidia-container-runtime
+- src: geerlingguy.nginx
+- src: geerlingguy.certbot
