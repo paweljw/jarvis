@@ -1,5 +1,5 @@
 - platform: polling
   api_key: !env_var HA_TELEGRAM_SECRET
   allowed_chat_ids:
-    - !env_var HA_TELEGRAM_PJW_CHAT_ID
-    - !env_var HA_TELEGRAM_MAGDA_CHAT_ID
+    - !secret pjw_chat_id
+    - !secret magda_chat_id
