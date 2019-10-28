@@ -1,0 +1,41 @@
+# Docker-based services
+- hosts: adloquium
+  become: yes
+  handlers:
+    - name: reload systemctl
+      become: yes
+      command: systemctl daemon-reload
+    - name: restart graylog
+      become: yes
+      service:
+        name: graylog
+        state: restarted
+        enabled: yes
+    - name: restart media
+      become: yes
+      service:
+        name: media
+        state: restarted
+        enabled: yes
+  tasks:
+    - name: Create elasticsearch directory (cause the image is dumb)
+      become: yes
+      file:
+        path: "{{ jarvis_dir }}/.docker/data/elasticsearch"
+        state: directory
+        owner: "{{ user }}"
+        group: "{{ user }}"
+    - name: Install graylog service
+      template:
+        src: ../templates/lib/systemd/system/graylog.service
+        dest: /lib/systemd/system/graylog.service
+      notify:
+        - reload systemctl
+        - restart graylog
+    - name: Install media service
+      template:
+        src: ../templates/lib/systemd/system/media.service
+        dest: /lib/systemd/system/media.service
+      notify:
+        - reload systemctl
+        - restart media

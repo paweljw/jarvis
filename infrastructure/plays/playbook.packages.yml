@@ -1,0 +1,14 @@
+# Quality of life basics
+- hosts: adloquium
+  become: yes
+  tasks:
+    - apt:
+        name: tree
+    - apt:
+        name: htop
+    - apt:
+        name: aptitude # cause if I see one more warning about this...
+    - apt:
+        name: mc
+    - apt:
+        name: zsh
