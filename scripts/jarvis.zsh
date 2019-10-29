@@ -69,17 +69,17 @@ function jarvis_command_backup() {
   mkdir -p $BACKUP_FOLDER;
   echo "Stopping services..."
   systemctl stop ha;
-  systemctl stop shared;
   systemctl stop media;
+  systemctl stop shared;
   systemctl stop graylog;
   echo "Compressing data"
   echo $BACKUP_FILE
   zip -1 -r $BACKUP_FILE $JARVIS_DIR -x"jarvis/.docker/data/plex/config/Library/Application Support/Plex Media Server/Metadata/**/*" -x"*.log" -x"jarvis/.docker/data/plex/config/Library/Application Support/Plex Media Server/Cache/**/*" -x"jarvis/.docker/data/plex/config/Library/Application Support/Plex Media Server/Media/**/*"
   echo "Starting services"
-  systemctl start shared;
-  systemctl start ha;
-  systemctl start media;
   systemctl start graylog;
+  systemctl start shared;
+  systemctl start media;
+  systemctl start ha;
   echo "Waiting for services to boot"
   sleep 60;
   echo $TIMESTAMP > $BACKUP_FOLDER/performed_at.txt
