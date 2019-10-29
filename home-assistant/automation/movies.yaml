@@ -1,6 +1,6 @@
 - alias: "Movie mode on"
   trigger:
-  - entity_id: media_player.plex_chromecast
+  - entity_id: media_player.purgatory
     platform: state
     to: playing
     for: '00:00:05'
@@ -18,12 +18,12 @@
       scene_name: "Movie"
 - alias: "Movie mode off"
   trigger:
-  - entity_id: media_player.plex_chromecast
+  - entity_id: media_player.purgatory
     platform: state
     from: playing
     to: paused
     for: '00:00:05'
-  - entity_id: media_player.plex_chromecast
+  - entity_id: media_player.purgatory
     platform: state
     from: playing
     to: idle

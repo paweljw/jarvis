@@ -1,5 +1,5 @@
 resources:
-  - url: /local/custom-lovelace/transit/card.js?v=8
+  - url: /local/custom-lovelace/transit/card.js?v=9
     type: module
   - url: /local/custom.css
     type: css
