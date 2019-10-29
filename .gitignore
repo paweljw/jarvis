@@ -9,3 +9,4 @@ vars.yml
 .env.rss
 .env.home-assistant
 .env.grafana
+.env.backup

@@ -63,6 +63,32 @@ function jarvis_execute_command() {
   return $?
 }
 
+function jarvis_command_backup() {
+  TIMESTAMP=$(date +%Y-%m-%d_%H:%M:%S);
+  BACKUP_FILE="${BACKUP_FOLDER}jarvis_$TIMESTAMP.zip";
+  mkdir -p $BACKUP_FOLDER;
+  echo "Stopping services..."
+  systemctl stop ha;
+  systemctl stop shared;
+  systemctl stop media;
+  systemctl stop graylog;
+  echo "Compressing data"
+  echo $BACKUP_FILE
+  zip -1 -r $BACKUP_FILE $JARVIS_DIR -x"jarvis/.docker/data/plex/config/Library/Application Support/Plex Media Server/Metadata/**/*" -x"*.log" -x"jarvis/.docker/data/plex/config/Library/Application Support/Plex Media Server/Cache/**/*" -x"jarvis/.docker/data/plex/config/Library/Application Support/Plex Media Server/Media/**/*"
+  echo "Starting services"
+  systemctl start shared;
+  systemctl start ha;
+  systemctl start media;
+  systemctl start graylog;
+  echo "Waiting for services to boot"
+  sleep 60;
+  echo $TIMESTAMP > $BACKUP_FOLDER/performed_at.txt
+  echo "Clearing old data"
+  find $BACKUP_FOLDER -mtime +3 -type f -delete;
+  aws s3 sync $BACKUP_FOLDER s3://adloquium-backups --delete
+  echo "Done"
+}
+
 function jarvis_command_graylog() {
   source "${JARVIS_DIR}/scripts/graylog.zsh"
 }

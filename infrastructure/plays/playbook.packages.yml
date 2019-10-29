@@ -22,6 +22,14 @@
         name: avahi-daemon
     - apt:
         name: postgresql-client
+    - apt:
+        name: zip
+    - apt:
+        name: python-pip
+    - apt:
+        name: influxdb-client
+    - pip:
+        name: awscli
     - service:
         name: avahi-daemon
         state: restarted

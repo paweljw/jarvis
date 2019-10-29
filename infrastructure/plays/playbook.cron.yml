@@ -24,3 +24,9 @@
         hour: "22"
         minute: "0"
         job: '/usr/bin/zsh -l -c "rm /tmp/*.log"'
+    - name: Perform backup
+      cron:
+        name: 'backup'
+        hour: "3"
+        minute: "15"
+        job: "/usr/bin/zsh -l -c 'jarvis backup' >> /tmp/backup.log 2>&1"

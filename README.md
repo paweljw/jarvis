@@ -13,3 +13,4 @@ Currently Jarvis runs on a scavenged commodity-hardware frankenputer dubbed Adlo
 
 * Install ansible
 * `bin/provision`
+* `aws configure` - remember to give crontab user some creds as well!

@@ -18,6 +18,7 @@ function jarvis_command_help() {
   $ jarvis ddns                                  - update dns on cloudflare
   $ jarvis env                                   - print all envs
   $ jarvis docker-compose args                   - run docker compose commands
+  $ jarvis backup                                - run docker compose commands
 "
 }
 
@@ -36,6 +37,7 @@ function main() {
   jarvis_load_variables ".env.influxdb";
   jarvis_load_variables ".env.home-assistant";
   jarvis_load_variables ".env.grafana";
+  jarvis_load_variables ".env.backup";
 
   cd $JARVIS_DIR;
   if ! jarvis_execute_command; then
