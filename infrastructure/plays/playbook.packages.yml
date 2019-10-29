@@ -30,6 +30,8 @@
         name: influxdb-client
     - pip:
         name: awscli
+    - pip:
+        name: subliminal
     - service:
         name: avahi-daemon
         state: restarted

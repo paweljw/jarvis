@@ -14,20 +14,20 @@
 - name: Quality of life stuff
   import_playbook: plays/playbook.packages.yml
 
-- name: NVidia/docker/nvtop
-  import_playbook: plays/playbook.nvidia.yml
+# - name: NVidia/docker/nvtop
+#   import_playbook: plays/playbook.nvidia.yml
 
-- name: Docker services
-  import_playbook: plays/playbook.dockersrv.yml
+# - name: Docker services
+#   import_playbook: plays/playbook.dockersrv.yml
 
-- name: nginx
-  import_playbook: plays/playbook.nginx.yml
+# - name: nginx
+#   import_playbook: plays/playbook.nginx.yml
 
-- name: crontab
-  import_playbook: plays/playbook.cron.yml
+# - name: crontab
+#   import_playbook: plays/playbook.cron.yml
 
-- name: ufw
-  import_playbook: plays/playbook.ufw.yml
+# - name: ufw
+#   import_playbook: plays/playbook.ufw.yml
 
-- name: samba
-  import_playbook: plays/playbook.samba.yml
+# - name: samba
+#   import_playbook: plays/playbook.samba.yml
