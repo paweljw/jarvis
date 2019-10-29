@@ -1,0 +1,23 @@
+ha_grafana:
+  title: "Grafana"
+  url: '/grafana/'
+  icon: 'mdi:database'
+ha_glances:
+  require_admin: true
+  title: "Glances"
+  url: 'https://adloquium.local/glances/'
+  icon: 'mdi:ubuntu'
+ha_plex:
+  title: "Plex"
+  url: '/plex/web/index.html'
+  icon: 'mdi:plex'
+ha_transmission:
+  title: "Transmission"
+  url: https://adloquium.local/transmission
+  icon: 'mdi:cloud-download'
+  require_admin: true
+ha_graylog:
+  require_admin: true
+  title: GrayLog
+  url: "https://adloquium.local/graylog"
+  icon: "mdi:math-log"

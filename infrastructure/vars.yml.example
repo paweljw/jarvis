@@ -4,3 +4,4 @@ local_domain: adloquium.local
 domain: adloquium.somehere
 email: p@somewhere
 rss_domain: miniflux.somehere
+samba_dir: /here/or/there

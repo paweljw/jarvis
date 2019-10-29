@@ -14,3 +14,36 @@ services:
       options:
         tag: plex
         gelf-address: udp://localhost:12201
+  transmission:
+    image: linuxserver/transmission:latest
+    restart: unless-stopped
+    ports:
+      - 8112:9091
+      - 51413:51413/udp
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: "Europe/Warsaw"
+    volumes:
+      - .docker/data/transmission:/config
+      - /home/pjw:/data
+      - /home/pjw/tmp:/downloads_incomplete
+      - /home/pjw/tv:/downloads
+    logging:
+      driver: gelf
+      options:
+        tag: transmission
+        gelf-address: udp://localhost:12201
+  flexget:
+    image: cpoppema/docker-flexget
+    network_mode: host
+    environment:
+      PGID: 1000
+      PUID: 1000
+      TZ: "Europe/Warsaw"
+      WEB_PASSWD: myhorriblesecret
+      TORRENT_PLUGIN: transmission
+    restart: unless-stopped
+    volumes:
+      - .docker/data/flexget:/config
+      - /home/pjw/tv:/downloads

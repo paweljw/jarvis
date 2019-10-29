@@ -29,6 +29,7 @@ lovelace:
 notify: !include components/notify.yaml
 
 plex: !include components/plex.yaml
+panel_iframe: !include components/panel_iframe.yaml
 
 script: !include scripts.yaml
 sensor: !include_dir_merge_list sensors/
@@ -38,6 +39,7 @@ switch: !include_dir_merge_list switches/
 telegram_bot: !include components/telegram_bot.yaml
 tts:
   - platform: google_translate
+transmission: !include components/transmission.yaml
 
 weather: !include components/weather.yaml
 

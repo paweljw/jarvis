@@ -1,0 +1,18 @@
+- alias: Completed Torrent
+  trigger:
+    platform: event
+    event_type: transmission_downloaded_torrent
+  action:
+    service: notify.pjw_telegram
+    data_template:
+      title: "Torrent completed!"
+      message: "{{trigger.event.data.name}}"
+- alias: started Torrent
+  trigger:
+    platform: event
+    event_type: transmission_started_torrent
+  action:
+    service: notify.pjw_telegram
+    data_template:
+      title: "Torrent started!"
+      message: "{{trigger.event.data.name}}"
