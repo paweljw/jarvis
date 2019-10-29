@@ -1,1 +1,2 @@
 base_url: !env_var HA_URL
+api_password: !env_var HA_LEGACY_API_PASSWORD

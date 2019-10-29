@@ -1,4 +1,4 @@
 exclude:
   entities:
-    - sensor.uniwersytet_pedagogiczny_departures
-    - sensor.bialucha_departures
+    - sensor.back_from_work_transit
+    - sensor.to_work_transit

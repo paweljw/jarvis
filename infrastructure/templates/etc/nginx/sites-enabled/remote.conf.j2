@@ -39,34 +39,6 @@ server {
     rewrite ^/web/(.*) /plex/web/$1? redirect;
   }
 
-  location /api/alexa/flash_briefings {
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_pass http://hass/api/alexa/flash_briefings/status;
-  }
-
-  location /api/alexa/smart_home {
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_pass http://hass/api/alexa/smart_home;
-  }
-
-  location /api/alexa {
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_pass http://hass/api/alexa;
-  }
-
-  location /api/webhook {
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header Host $host;
-    proxy_pass http://hass/api/webhook;
-  }
-
   location /ping.txt {
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;

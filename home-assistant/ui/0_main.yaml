@@ -6,7 +6,7 @@
           state_not: "codest"
       card:
         type: custom:transit-card
-        entity: sensor.uniwersytet_pedagogiczny_departures
+        entity: sensor.to_work_transit
 
     - type: conditional
       conditions:
@@ -14,7 +14,7 @@
           state: "codest"
       card:
         type: custom:transit-card
-        entity: sensor.bialucha_departures
+        entity: sensor.back_from_work_transit
     - type: sensor
       entity: sensor.bronowice_aqi
       graph: line

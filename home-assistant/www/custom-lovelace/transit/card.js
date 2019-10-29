@@ -92,34 +92,28 @@ class TransitCard extends LitElement {
   }
 
   buildDepartureItem(departure) {
-    const { at, l } = departure
-
-    let minutesLeft = null;
-
-    if (at) {
-      const [hour, minute] = at.split(':')
-      const dateAt = new Date()
-      dateAt.setHours(hour);
-      dateAt.setMinutes(minute);
-
-      minutesLeft = Math.round((dateAt - Date.now()) / 1000 / 60)
-    }
-
+    const { line, direction, time } = departure
+    const minutesLeft = Math.round((Date.parse(time.date) - Date.now()) / 1000 / 60)
     return html`
       <div class="departure">
         <div class="minutes">
-          ${minutesLeft === null ? '??' : minutesLeft} <span>min</span>
+          ${minutesLeft} <span>min</span>
         </div>
         <div class="details">
           <div class="details-summary">
             <div class="details-line">
-              <ha-icon icon="mdi:train"></ha-icon>
-              ${l}
+              <ha-icon icon="${line.kind == 'tram' ? 'mdi:train' : 'mdi:bus'}"></ha-icon>
+              ${line.name}
             </div>
 
             <div class="details-departure">
-              ${at}
+              ${time.formatted}
             </div>
+          </div>
+
+          <div class="details-direction">
+            <ha-icon icon="mdi:arrow-right"></ha-icon>
+            ${direction.target.name}
           </div>
         </div>
       </div>
@@ -127,23 +121,13 @@ class TransitCard extends LitElement {
   }
 
   render() {
-    if (!this.entity) {
-      return null;
-    }
-
-    const { state } = this.entity
-
-    if (!state || state.length === 0) {
-      return null;
-    }
-
-    const departures = JSON.parse(state)
+    const { attributes: { departures } } = this.entity
 
     return html`
       ${styles}
       <ha-card>
         <div class="departures">
-          ${departures.map(departure => this.buildDepartureItem(departure))}
+          ${departures.map((departure) => this.buildDepartureItem(departure))}
         </div>
       </ha-card>
     `

@@ -89,6 +89,17 @@ function jarvis_command_backup() {
   echo "Done"
 }
 
+function jarvis_command_pushup() {
+  echo "Down...";
+  sudo systemctl stop ha;
+  sudo systemctl stop shared;
+  echo "...hoooold it...";
+  sleep 60;
+  echo "...up!";
+  sudo systemctl start shared;
+  sudo systemctl start ha;
+}
+
 function jarvis_command_graylog() {
   source "${JARVIS_DIR}/scripts/graylog.zsh"
 }

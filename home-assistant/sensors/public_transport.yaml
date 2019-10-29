@@ -1,19 +1,13 @@
-# - platform: rest
-#   name: Uniwersytet Pedagogiczny departures
-#   resource: https://mpk.jacekk.net/proxy_bus.php/services/passageInfo/stopPassages/stop?stop=88&mode=departure
-#   force_update: true
-#   json_attributes:
-#     - actual
-#   value_template: '{{ value_json["actual"][0] }}'
+- platform: public_transit
+  name: back_from_work_transit
+  from: "Białucha"
+  to: "Bronowice Małe"
+  count: 5
+  endpoint: "http://localhost:5000/api"
 
-- platform: command_line
-  name: Uniwersytet Pedagogiczny departures
-  command: >
-    curl -s \"https://mpk.jacekk.net/proxy_tram.php/services/passageInfo/stopPassages/stop?stop=88&mode=departure\" | jq \'[.actual | map(select(.direction == \"Wzgórza K.\" // .direction == \"Kopiec Wandy\")) | map(select(.patternText|startswith(\"4\"))) | .[0:5] | .[] | { at: (.actualTime // .plannedTime), l: .patternText }]\'
-  scan_interval: 60
-
-- platform: command_line
-  name: Bialucha departures
-  command: >
-    curl -s \"https://mpk.jacekk.net/proxy_tram.php/services/passageInfo/stopPassages/stop?stop=130&mode=departure\" | jq \'[.actual | map(select(.direction|startswith(\"Bronowice\"))) |  map(select(.patternText|startswith(\"4\"))) | .[0:5] | .[] | { at: (.actualTime // .plannedTime), l: .patternText }]\'
-  scan_interval: 60
+- platform: public_transit
+  name: to_work_transit
+  from: "Uniwersytet Pedagogiczny"
+  to: "Wzgórza Krzesławickie"
+  count: 5
+  endpoint: "http://localhost:5000/api"
