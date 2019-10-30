@@ -79,6 +79,7 @@ function jarvis_command_backup() {
   systemctl start graylog;
   systemctl start shared;
   systemctl start media;
+  sleep 30; # HA is not a fan of getting up and not finding its friends
   systemctl start ha;
   echo "Waiting for services to boot"
   sleep 60;
