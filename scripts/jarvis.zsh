@@ -101,6 +101,15 @@ function jarvis_command_pushup() {
   sudo systemctl start ha;
 }
 
+function jarvis_command_unban() {
+  sudo fail2ban-client set ha unbanip ${COMMAND_ARGS};
+  sudo fail2ban-client set nginx-noscript unbanip ${COMMAND_ARGS};
+  sudo fail2ban-client set nginx-http-auth unbanip ${COMMAND_ARGS};
+  sudo fail2ban-client set nginx-badbots unbanip ${COMMAND_ARGS};
+  sudo fail2ban-client set nginx-forbidden unbanip ${COMMAND_ARGS};
+  sudo fail2ban-client set mosquitto-auth unbanip ${COMMAND_ARGS};
+}
+
 function jarvis_command_graylog() {
   source "${JARVIS_DIR}/scripts/graylog.zsh"
 }

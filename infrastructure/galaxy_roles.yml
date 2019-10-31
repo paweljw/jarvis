@@ -2,3 +2,4 @@
 - src: geerlingguy.nginx
 - src: geerlingguy.certbot
 - src: weareinteractive.ufw
+- src: nickjj.fail2ban

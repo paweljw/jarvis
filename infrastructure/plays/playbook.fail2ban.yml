@@ -1,0 +1,45 @@
+- hosts: adloquium
+  become: yes
+  roles:
+    - role: nickjj.fail2ban
+  handlers:
+    - name: restart fail2ban
+      service:
+        name: fail2ban
+        state: restarted
+  tasks:
+    - name: Copy filter nginx-http-auth.conf to fail2ban
+      template:
+        force: yes
+        src: ../templates/etc/fail2ban/filter.d/nginx-http-auth.conf
+        dest: /etc/fail2ban/filter.d/nginx-http-auth.conf
+      notify:
+        - restart fail2ban
+    - name: Copy filter nginx-badbots.conf to fail2ban
+      template:
+        force: yes
+        src: ../templates/etc/fail2ban/filter.d/nginx-badbots.conf
+        dest: /etc/fail2ban/filter.d/nginx-badbots.conf
+      notify:
+        - restart fail2ban
+    - name: Copy filter nginx-forbidden.conf to fail2ban
+      template:
+        force: yes
+        src: ../templates/etc/fail2ban/filter.d/nginx-forbidden.conf
+        dest: /etc/fail2ban/filter.d/nginx-forbidden.conf
+      notify:
+        - restart fail2ban
+    - name: Copy filter ha.conf to fail2ban
+      template:
+        force: yes
+        src: ../templates/etc/fail2ban/filter.d/ha.conf
+        dest: /etc/fail2ban/filter.d/ha.conf
+      notify:
+        - restart fail2ban
+    - name: Copy jail ha.conf to fail2ban
+      template:
+        force: yes
+        src: ../templates/etc/fail2ban/jail.d/ha.conf
+        dest: /etc/fail2ban/jail.d/ha.conf
+      notify:
+        - restart fail2ban

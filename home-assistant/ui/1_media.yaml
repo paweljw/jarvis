@@ -26,3 +26,10 @@
         - switch.transmission
       title: Transmission
       type: entities
+    - type: custom:monster-card
+      card:
+        type: entities
+        title: Fail2Ban
+      filter:
+        include:
+          - entity_id: "sensor.fail2ban*"

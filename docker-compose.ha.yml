@@ -15,7 +15,7 @@ services:
       - HOME_ASSISTANT_DB_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:5432/${POSTGRES_DB}
     volumes:
       - ./home-assistant:/config
-      # - /var/log/fail2ban.log:/fail2ban/fail2ban.log:ro
+      - /var/log/fail2ban.log:/fail2ban/fail2ban.log:ro
       - /tmp:/tmp
     logging:
       driver: gelf
