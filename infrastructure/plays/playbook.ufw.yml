@@ -16,7 +16,7 @@
       - { port: 139, rule: allow, comment: 'Samba' }
       - { port: 445, rule: allow, comment: 'Samba' }
       - { from_ip: '127.0.0.1/24', comment: 'Allow localhost' }
-      - { from_ip: '192.168.0.1/24', comment: 'Allow local network' }
+      - { from_ip: '192.168.0.0/16', comment: 'Allow local network' }
       - { port: 32400, rule: allow, comment: 'Plex companion' }
       - { port: 3005, rule: allow, comment: 'Plex companion' }
       - { port: 5353, rule: allow, comment: 'Plex zeroconf' }
@@ -28,3 +28,7 @@
       - { port: 32413, rule: allow, comment: 'Plex GDM network discover' }
       - { port: 32414, rule: allow, comment: 'Plex GDM network discover' }
       - { port: 51413, rule: allow, comment: 'Transmission' }
+      - { port: 25565, rule: allow, comment: 'Minecraft' }
+      - { port: 28016, rule: allow, comment: 'Minecraft' }
+      - { port: 4326, rule: allow, comment: 'Minecraft' }
+      - { port: 4327, rule: allow, comment: 'Minecraft' }

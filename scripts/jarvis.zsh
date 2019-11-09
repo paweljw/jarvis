@@ -39,6 +39,7 @@ function jarvis_command_ps() {
 function jarvis_command_ddns() {
   bin/ddns.py $MAIN_DOMAIN $JARVIS_SUBDOMAIN 1;
   bin/ddns.py $MAIN_DOMAIN $RSS_SUBDOMAIN 1;
+  bin/ddns.py $MAIN_DOMAIN $SSH_SUBDOMAIN 0;
 }
 
 function jarvis_command_certbot() {
