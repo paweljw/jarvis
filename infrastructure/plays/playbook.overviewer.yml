@@ -1,0 +1,17 @@
+# This is broken for very fun reasons I will not explain here
+# - hosts: adloquium
+#   become: yes
+#   tasks:
+#     - apt_key:
+#         url: https://overviewer.org/debian/overviewer.gpg.asc
+#         state: present
+#     - apt_repository:
+#         repo: deb https://overviewer.org/debian ./
+#         state: present
+#     - apt:
+#         name: minecraft-overviewer
+#     - file:
+#         state: directory
+#         path: "{{ jarvis_dir }}/.overviewer"
+#         owner: "{{ user }}"
+#         group: "{{ user }}"

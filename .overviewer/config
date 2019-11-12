@@ -1,0 +1,25 @@
+worlds["adloquium"] = "/jarvis/.docker/data/minecraft/world"
+
+renders["survivalday"] = {
+    "world": "adloquium",
+    "title": "Adloquium Daytime",
+    "rendermode": smooth_lighting,
+    "dimension": "overworld",
+}
+
+renders["survivalnight"] = {
+    "world": "adloquium",
+    "title": "Adloquium Nighttime",
+    "rendermode": smooth_night,
+    "dimension": "overworld",
+}
+
+renders["survivalnether"] = {
+    "world": "adloquium",
+    "title": "Adloquium Nether",
+    "rendermode": nether_smooth_lighting,
+    "dimension": "nether",
+}
+
+outputdir = "/jarvis/.overviewer"
+texturepath = "/jarvis/.overviewer/pure.zip"

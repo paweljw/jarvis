@@ -134,6 +134,11 @@ server {
     proxy_pass http://flexget;
   }
 
+  location /mc {
+    index index.html;
+    alias {{ jarvis_dir }}/.overviewer;
+  }
+
   error_page 404 403 @error;
 
   location @error {

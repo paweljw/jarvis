@@ -68,6 +68,10 @@ server {
     proxy_set_header Connection "upgrade";
   }
 
+  location /mc {
+    index index.html;
+    alias {{ jarvis_dir }}/.overviewer;
+  }
 
   error_page 404 403 @error;
 

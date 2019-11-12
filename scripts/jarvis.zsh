@@ -111,6 +111,10 @@ function jarvis_command_unban() {
   sudo fail2ban-client set mosquitto-auth unbanip ${COMMAND_ARGS};
 }
 
+function jarvis_command_mcmap() {
+  /usr/local/bin/mcoverviewer --config=${JARVIS_DIR}/.overviewer/config
+}
+
 function jarvis_command_graylog() {
   source "${JARVIS_DIR}/scripts/graylog.zsh"
 }

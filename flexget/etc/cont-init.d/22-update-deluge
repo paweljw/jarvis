@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv bash
+
+if [[ "$TORRENT_PLUGIN" == *"deluge"* ]]; then
+    pip install -U deluge_client
+fi

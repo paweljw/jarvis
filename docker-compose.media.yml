@@ -35,13 +35,13 @@ services:
         tag: transmission
         gelf-address: udp://localhost:12201
   flexget:
-    image: cpoppema/docker-flexget
+    build: ./flexget/
     network_mode: host
     environment:
       PGID: 1000
       PUID: 1000
       TZ: "Europe/Warsaw"
-      WEB_PASSWD: myhorriblesecret
+      WEB_PASSWD: "my horrible secret 123!"
       TORRENT_PLUGIN: transmission
     restart: unless-stopped
     volumes:

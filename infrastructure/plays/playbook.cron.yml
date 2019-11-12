@@ -30,3 +30,8 @@
         hour: "3"
         minute: "15"
         job: "/usr/bin/zsh -l -c 'jarvis backup' >> /tmp/backup.log 2>&1"
+    - name: Add crontab entry for mcmap
+      cron:
+        name: "mcmap"
+        minute: "*/30"
+        job: "/usr/bin/zsh -l -c 'jarvis mcmap' >> /tmp/mcmap.log 2>&1"
