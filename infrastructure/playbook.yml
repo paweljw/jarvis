@@ -8,32 +8,32 @@
       include_vars:
         file: vars.yml
 
-- name: Jarvis init stuff
-  import_playbook: plays/playbook.jarvis.yml
-
-- name: Quality of life stuff
-  import_playbook: plays/playbook.packages.yml
-
-- name: NVidia/docker/nvtop
-  import_playbook: plays/playbook.nvidia.yml
-
-- name: Docker services
-  import_playbook: plays/playbook.dockersrv.yml
-
-- name: nginx
-  import_playbook: plays/playbook.nginx.yml
-
+# - name: Jarvis init stuff
+#  import_playbook: plays/playbook.jarvis.yml
+#
+#- name: Quality of life stuff
+#  import_playbook: plays/playbook.packages.yml
+#
+# - name: NVidia/docker/nvtop
+#  import_playbook: plays/playbook.nvidia.yml
+#
+# - name: Docker services
+# import_playbook: plays/playbook.dockersrv.yml
+#
+# - name: nginx
+#  import_playbook: plays/playbook.nginx.yml
+#
 - name: crontab
   import_playbook: plays/playbook.cron.yml
 
-- name: ufw
-import_playbook: plays/playbook.ufw.yml
+# - name: ufw
+# import_playbook: plays/playbook.ufw.yml
 
-- name: samba
-  import_playbook: plays/playbook.samba.yml
-
-- name: fail2ban
-  import_playbook: plays/playbook.fail2ban.yml
+# - name: samba
+#  import_playbook: plays/playbook.samba.yml
+#
+# - name: fail2ban
+#  import_playbook: plays/playbook.fail2ban.yml
 
 # - name: overviewer
 #   import_playbook: plays/playbook.overviewer.yml

@@ -47,11 +47,6 @@ services:
     volumes:
       - .docker/data/flexget:/config
       - /home/pjw/tv:/downloads
-    logging:
-      driver: gelf
-      options:
-        tag: flexget
-        gelf-address: udp://localhost:12201
   minecraft:
     image: itzg/minecraft-server
     ports:
@@ -72,6 +67,7 @@ services:
       FORGEVERSION: "14.23.5.2768"
       ENV_VARIABLE_PREFIX: "MCFG_"
       SERVER_NAME: "Adloquium"
+      MEMORY: "2G"
     logging:
       driver: gelf
       options:

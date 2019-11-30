@@ -1,20 +1,5 @@
 - title: Overview
   cards:
-    - type: conditional
-      conditions:
-        - entity: person.pawel
-          state_not: "codest"
-      card:
-        type: custom:transit-card
-        entity: sensor.to_work_transit
-
-    - type: conditional
-      conditions:
-        - entity: person.pawel
-          state: "codest"
-      card:
-        type: custom:transit-card
-        entity: sensor.back_from_work_transit
     - type: sensor
       entity: sensor.bronowice_aqi
       graph: line

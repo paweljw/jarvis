@@ -28,6 +28,8 @@
         name: python-pip
     - apt:
         name: influxdb-client
+    - apt:
+        name: cpulimit
     - pip:
         name: awscli
     - pip:

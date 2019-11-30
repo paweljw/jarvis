@@ -99,13 +99,13 @@ services:
       options:
         tag: rss
         gelf-address: udp://localhost:12201
-  busix:
-    image: macbury/busix:latest
-    network_mode: host
-    env_file:
-      - '.env.busix'
-    logging:
-      driver: gelf
-      options:
-        tag: busix
-        gelf-address: udp://localhost:12201
+
+
+
+
+
+
+
+
+
+

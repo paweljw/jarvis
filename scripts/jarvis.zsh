@@ -21,7 +21,7 @@ function jarvis_validate_command() {
 
 function jarvis_command_cleanup() {
   docker rmi $(docker images -q -f dangling=true)
-  ​docker volume rm $(docker volume ls -qf dangling=true)
+  docker volume rm $(docker volume ls -qf dangling=true)
 }
 
 function jarvis_command_psql() {
@@ -112,7 +112,9 @@ function jarvis_command_unban() {
 }
 
 function jarvis_command_mcmap() {
-  /usr/local/bin/mcoverviewer --config=${JARVIS_DIR}/.overviewer/config
+  export HOME=/home/pjw
+  cpulimit -z -f -m -l 15 -- /usr/local/bin/mcoverviewer --config="/jarvis/.overviewer/config" --simple-output
+  cpulimit -z -f -m -l 15 -- /usr/local/bin/mcoverviewer --config="/jarvis/.overviewer/config" --genpoi
 }
 
 function jarvis_command_graylog() {

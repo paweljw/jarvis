@@ -33,5 +33,5 @@
     - name: Add crontab entry for mcmap
       cron:
         name: "mcmap"
-        minute: "*/30"
+        minute: "17"
         job: "/usr/bin/zsh -l -c 'jarvis mcmap' >> /tmp/mcmap.log 2>&1"

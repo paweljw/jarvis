@@ -1,3 +1,18 @@
+def signFilter(poi):
+    if poi['id'] == 'Sign' or poi['id'] == 'minecraft:sign':
+        return "\n".join([poi['Text1'], poi['Text2'], poi['Text3'], poi['Text4']])
+
+def chestFilter(poi):
+    if poi['id'] == "Chest" or poi['id'] == 'minecraft:chest':
+        return ("Chest", "Chest with %d items" % len(poi.get('Items', [])))
+
+def townFilter(poi):
+    if poi['id'] == 'Town':
+        try:
+            return (poi['name'], poi['description'])
+        except KeyError:
+            return poi['name'] + '\n'
+
 worlds["adloquium"] = "/jarvis/.docker/data/minecraft/world"
 
 renders["survivalday"] = {
@@ -5,6 +20,7 @@ renders["survivalday"] = {
     "title": "Adloquium Daytime",
     "rendermode": smooth_lighting,
     "dimension": "overworld",
+    "markers": [dict(name="Signs", filterFunction=signFilter), dict(name="Chests", filterFunction=chestFilter), dict(name="Towns", filterFunction=townFilter)],
 }
 
 renders["survivalnight"] = {
@@ -22,4 +38,4 @@ renders["survivalnether"] = {
 }
 
 outputdir = "/jarvis/.overviewer"
-texturepath = "/jarvis/.overviewer/pure.zip"
+texturepath = "/jarvis/.overviewer/p.zip"
