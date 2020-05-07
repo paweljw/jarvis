@@ -99,13 +99,14 @@ services:
       options:
         tag: rss
         gelf-address: udp://localhost:12201
-
-
-
-
-
-
-
-
-
-
+  nextcloud:
+    build: ./nextcloud/
+    ports:
+      - 4333:80
+    env_file:
+      - '.env.nextcloud'
+    volumes:
+      - /home/pjw/nextcloud:/var/www/html
+    depends_on:
+      - database
+      - redis

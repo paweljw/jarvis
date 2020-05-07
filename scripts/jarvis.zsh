@@ -40,11 +40,15 @@ function jarvis_command_ddns() {
   bin/ddns.py $MAIN_DOMAIN $JARVIS_SUBDOMAIN 1;
   bin/ddns.py $MAIN_DOMAIN $RSS_SUBDOMAIN 1;
   bin/ddns.py $MAIN_DOMAIN $SSH_SUBDOMAIN 0;
+  bin/ddns.py $WP_DOMAIN_ONE "" 1;
+  bin/ddns.py $WP_DOMAIN_TWO "" 1;
+  bin/ddns.py $NEXTCLOUD_DOMAIN;
+  bin/ddns.py $WIKI_DOMAIN;
 }
 
 function jarvis_command_certbot() {
   systemctl stop nginx;
-  certbot renew --no-self-upgrade;
+  /usr/local/bin/certbot renew --no-self-upgrade;
   systemctl start nginx;
 }
 
@@ -73,6 +77,7 @@ function jarvis_command_backup() {
   systemctl stop media;
   systemctl stop shared;
   systemctl stop graylog;
+  systemctl stop wordpress;
   echo "Compressing data"
   echo $BACKUP_FILE
   zip -1 -r $BACKUP_FILE $JARVIS_DIR -x"jarvis/.docker/data/plex/config/Library/Application Support/Plex Media Server/Metadata/**/*" -x"*.log" -x"jarvis/.docker/data/plex/config/Library/Application Support/Plex Media Server/Cache/**/*" -x"jarvis/.docker/data/plex/config/Library/Application Support/Plex Media Server/Media/**/*"
@@ -80,6 +85,7 @@ function jarvis_command_backup() {
   systemctl start graylog;
   systemctl start shared;
   systemctl start media;
+  systemctl start wordpress;
   sleep 30; # HA is not a fan of getting up and not finding its friends
   systemctl start ha;
   echo "Waiting for services to boot"
@@ -113,8 +119,8 @@ function jarvis_command_unban() {
 
 function jarvis_command_mcmap() {
   export HOME=/home/pjw
-  cpulimit -z -f -m -l 15 -- /usr/local/bin/mcoverviewer --config="/jarvis/.overviewer/config" --simple-output
-  cpulimit -z -f -m -l 15 -- /usr/local/bin/mcoverviewer --config="/jarvis/.overviewer/config" --genpoi
+  #/usr/local/bin/mcoverviewer --config="/jarvis/.overviewer/config" --simple-output
+  #/usr/local/bin/mcoverviewer --config="/jarvis/.overviewer/config" --genpoi
 }
 
 function jarvis_command_graylog() {
@@ -131,4 +137,8 @@ function jarvis_command_shared() {
 
 function jarvis_command_ha() {
   source "${JARVIS_DIR}/scripts/ha.zsh"
+}
+
+function jarvis_command_wordpress() {
+  source "${JARVIS_DIR}/scripts/wordpress.zsh"
 }

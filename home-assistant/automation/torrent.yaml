@@ -12,11 +12,15 @@
     platform: event
     event_type: transmission_started_torrent
   action:
-    service: notify.pjw_telegram
-    data_template:
-      title: "Torrent started!"
-      message: "{{trigger.event.data.name}}"
-- alias: 'Add torrent'
+    - service: notify.pjw_telegram
+      data_template:
+        title: "Torrent started!"
+        message: "{{trigger.event.data.name}}"
+    - service: notify.magda_telegram
+      data_template:
+        title: "Torrent started!"
+        message: "{{trigger.event.data.name}}"
+- alias: 'Add torrent by PJW'
   trigger:
     - platform: event
       event_type: telegram_command
@@ -25,6 +29,21 @@
         chat_id: !secret pjw_chat_id
   action:
     - service: notify.pjw_telegram
+      data_template:
+        message: Hold on, adding yer stuff...
+    - service: transmission.add_torrent
+      data_template:
+        torrent: '{{ trigger.event.data.args | join(" ") }}'
+
+- alias: 'Add torrent by Magda'
+  trigger:
+    - platform: event
+      event_type: telegram_command
+      event_data:
+        command: '/t'
+        chat_id: !secret magda_chat_id
+  action:
+    - service: notify.magda_telegram
       data_template:
         message: Hold on, adding yer stuff...
     - service: transmission.add_torrent

@@ -10,3 +10,5 @@ vars.yml
 .env.home-assistant
 .env.grafana
 .env.backup
+.env.nextcloud
+octoprint/*
