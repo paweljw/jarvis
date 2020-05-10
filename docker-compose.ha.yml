@@ -18,7 +18,7 @@ services:
       - /var/log/fail2ban.log:/fail2ban/fail2ban.log:ro
       - /tmp:/tmp
     logging:
-      driver: gelf
-      options:
+        driver: gelf
+        options:
         tag: homeassistant
         gelf-address: udp://localhost:12201

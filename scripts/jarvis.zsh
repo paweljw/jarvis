@@ -78,6 +78,7 @@ function jarvis_command_backup() {
   systemctl stop shared;
   systemctl stop graylog;
   systemctl stop wordpress;
+  sleep 60; # HA seems to have a hard time going to sleep lately
   echo "Compressing data"
   echo $BACKUP_FILE
   zip -1 -r $BACKUP_FILE $JARVIS_DIR -x"jarvis/.docker/data/plex/config/Library/Application Support/Plex Media Server/Metadata/**/*" -x"*.log" -x"jarvis/.docker/data/plex/config/Library/Application Support/Plex Media Server/Cache/**/*" -x"jarvis/.docker/data/plex/config/Library/Application Support/Plex Media Server/Media/**/*"
@@ -86,7 +87,7 @@ function jarvis_command_backup() {
   systemctl start shared;
   systemctl start media;
   systemctl start wordpress;
-  sleep 30; # HA is not a fan of getting up and not finding its friends
+  sleep 60; # HA is not a fan of getting up and not finding its friends
   systemctl start ha;
   echo "Waiting for services to boot"
   sleep 60;

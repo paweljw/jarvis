@@ -47,6 +47,13 @@ services:
     volumes:
       - .docker/data/flexget:/config
       - /home/pjw/tv:/downloads
+  gollum:
+    build: ./gollum/
+    restart: unless-stopped
+    ports:
+      - 5090:80
+    volumes:
+      - /home/pjw/housegrimson.rocks:/wiki
 #  minecraft:
 #    image: itzg/minecraft-server
 #    ports:
